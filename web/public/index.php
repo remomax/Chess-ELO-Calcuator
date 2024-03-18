@@ -90,6 +90,6 @@ echo "</table>";
 //echo "PLZ: " . $person->getplz() . $u;
 //echo "Hausnummer: " . $person->gethausnummer() . $u;
 //echo "Straße: " . $person->getstreet() . $u;
-//echo "Mail: " . $person->getMail() . $u;
+//echo "Mail: " . $person->getMail() . $u; a
 
 

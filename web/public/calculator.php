@@ -1,9 +1,5 @@
 <?php
 declare(strict_types=1);
-require '../app/classes/Connection.php';
-require "../app/classes/Person.php";
-$connection = new Connection();
-
 ?>
 
 <html><head></head><body>
@@ -12,7 +8,9 @@ $connection = new Connection();
 
 <form method="post">
     <h1>1 Gewonnen, 0.5 Remis, 0 Lost</h1>
-
+    <p><input name="ra"> ELO A</p>
+    <p><input name="rb"> ELO B</p>
+    <p><input name="k"> K-Wert</p>
     <p><input name="sa"> Spielstand A</p>
     <p><input name="sb"> Spielstand B</p>
     <p><input type="submit"></p>
@@ -20,14 +18,6 @@ $connection = new Connection();
 </form>
 
 <?php
-$sql = "SELECT games, elo, age FROM person";
-
-$connection = new Connection();
-
-$result = $connection->getConnection()->query($sql);
-///* @var Person[] $list */
-
-
 
 echo "ra + rb " . $_POST["ra"] . " " . $_POST["rb"];
 echo "<br>";

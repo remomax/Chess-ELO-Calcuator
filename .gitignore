@@ -1,2 +1,6 @@
-/data/
+/data/*
 .idea
+/etc/
+docker-compose.yml
+.env
+/web/public/old/

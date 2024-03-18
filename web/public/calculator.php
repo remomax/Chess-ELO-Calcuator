@@ -1,5 +1,9 @@
 <?php
 declare(strict_types=1);
+$u = "<br>";
+require '../app/classes/Connection.php';
+require "../app/classes/game.php";
+$connection = new Connection();
 ?>
 
 <html><head></head><body>
@@ -8,27 +12,81 @@ declare(strict_types=1);
 
 <form method="post">
     <h1>1 Gewonnen, 0.5 Remis, 0 Lost</h1>
-    <p><input name="ra"> ELO A</p>
-    <p><input name="rb"> ELO B</p>
-    <p><input name="k"> K-Wert</p>
-    <p><input name="sa"> Spielstand A</p>
-    <p><input name="sb"> Spielstand B</p>
+    <p><input minlength="1" maxlength="4" name="ra" > Deine ELO:</p>
+    <p><input minlength="1" maxlength="4" name="rb"> ELO Schwarz</p>
+    <p><input minlength="2" maxlength="2" name="k"> K-Wert</p>
+      <input type="radio" Id="w" name="winner" value="1">
+      <label for="html">Weiß Gewonnen</label><br>
+      <input type="radio" id="b" name="winner" value="0">
+      <label for="html">Schwarz Gewonnen</label><br>
+      <input type="radio" id="none" name="winner" value="0.5">
+      <label for="html">Remie</label><br>
+
+    <h3> Als was Hasst Du Gespielt?</h3>
+      <input type="radio" id="white" name="player" value="1">
+      <label for="html">Weiß</label><br>
+      <input type="radio" id="black" name="player" value="0">
+      <label for="html">Schwarz</label><br>
+
     <p><input type="submit"></p>
+
+
+
+
 
 </form>
 
 <?php
 
-echo "ra + rb " . $_POST["ra"] . " " . $_POST["rb"];
+$sql = "SELECT (id, age, elo, games) FROM person";
+
+
+
+
+echo "Winner: ";
+var_dump($_POST["winner"]);
+echo $u;
+$winner = $_POST["winner"];
+
+
+if ($winner == 1) {
+    $SA = 1;
+    $SB = 0;
+}
+if ($winner == 0) {
+    $SA = 0;
+    $SB = 1;
+}
+
+if  ($winner == 0.5) {
+    $SA = '0.5';
+    $SB = '0.5';
+}
+
+
+echo $u;
+echo "sa: ";
+var_dump($SA);
 echo "<br>";
-echo "k + k " . $_POST["k"] . " " . $_POST["k"];
+echo "sb: ";
+var_dump($SB);
+echo $u;
+
+$RA = $_POST["ra"];
+$RB = $_POST["rb"];
+$K  = $_POST["k"];
+
+echo $u;
+echo "ra + rb " . $RA . " " . $RB;
 echo "<br>";
-echo "sa + sb " . $_POST["sa"] . " " . $_POST["sb"];
+echo "k + k " . $K . " " . $K;
+echo "<br>";
+echo "sa + sb " . $SA . " " . $SB;
 echo "<br>";
 
 
 echo "ergebniss: ";
-$differenzBA = $_POST["rb"] - $_POST["ra"];
+$differenzBA = $RB - $RA;
 echo $differenzBA;
 echo "<br>";
 $differenzBA400 = $differenzBA / 400;
@@ -45,11 +103,6 @@ echo $EA;
 echo "<br>";
 echo "Berechnung Teil 2: ";
 echo "<br>";
-$RA = $_POST["ra"];
-$RB = $_POST["rb"];
-$K = $_POST["k"];
-$SA = $_POST["sa"];
-$SB = $_POST["sb"];
 $ELOA = $RA + $K * ($SA - $EA);
 echo "ELO A: ";
 echo $ELOA;
@@ -61,8 +114,8 @@ echo "<br>";
 echo "Spieler B Berechunng:";
 echo "<br>";
 echo "ergebniss: ";
-echo $_POST["ra"] - $_POST["rb"];
-$differenzAB = $_POST["ra"] - $_POST["rb"];
+echo $RA - $RB;
+$differenzAB = $RA - $RB;
 echo "<br>";
 echo $differenzAB;
 echo "<br>";

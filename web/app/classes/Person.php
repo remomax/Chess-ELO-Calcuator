@@ -12,6 +12,8 @@ class Person {
     private string $street;
     private string $email;
     private int $games;
+    private string $username;
+    private string $password;
 
 
     public function getplz(): ?string {
@@ -42,6 +44,14 @@ class Person {
     public function getGames(): int {
         return $this->games;
     }
+    public function getUsername(): string {
+        return $this->username;
+    }
+    public function getPassword(): string {
+        return $this->password;
+    }
+
+
 
     public function setAge(int $age): void {
         if ($age <= 17) {
@@ -61,21 +71,13 @@ class Person {
         $this->elo = $elo;
     }
     public function setplz(string $plz):void {
-        if ($plz < 1001) {
-            echo "<br>"."Diese PLZ Exestirt nicht in Deutschland"."<br>";
-        }
-        elseif ($plz >= 1001) {
-            $this->plz = $plz;
-        }
+        $this->plz = $plz;
+
     }
     public function sethausnummer(string $hausnummer): void {
-        if ($hausnummer < 1) {
-            echo "<br>"."Diese Hausnummer gibt es nicht"."<br>";
-        }
-        elseif ($hausnummer >= 1) {
             $this->hausnummer = $hausnummer;
-        }
     }
+
     public function setstreet(string $street): void {
             $this->street = $street;
 
@@ -85,6 +87,12 @@ class Person {
     }
     public function setGames(int $games): void {
         $this->games = $games;
+    }
+    public function setUsername(string $username): void {
+        $this->username = $username;
+    }
+    public function setPassword(string $password): void {
+        $this->password = $password;
     }
 
 }

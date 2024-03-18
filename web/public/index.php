@@ -84,7 +84,7 @@ echo "</table>";
 
 
 
-//echo "Alter: " . $person->getAge() . $u; a
+//echo "Alter: " . $person->getAge() . $u;
 //echo "Name: " . $person->getLName() . ", " . $person->getFName() . $u;
 //echo "ELO: " . $person->getELO() . $u;
 //echo "PLZ: " . $person->getplz() . $u;

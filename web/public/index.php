@@ -54,27 +54,27 @@ if ($result->num_rows > 0) {
     echo '0 results';
 }
 
-echo "<table border=´1´>";
-    echo "<tr><th>Nummer</th><th>Alter</th><th>Name</th><th>Vorname</th><th>ELO</th><th>PLZ</th><th>Hausnummer</th><th>Straße</th><th>E-Mail</th><th>Games</th><th>Username</th><th>Password</th></tr>";
-
-    foreach ($list as $key => $value) {
-        echo "<tr>"
-            ."<td>".$key.":"."</td>"
-            ."<td>".$value->getAge(). "</td>"
-            ."<td>".$value->getLName(). "</td>"
-            ."<td>".$value->getFName()."</td>"
-            ."<td>".$value->getELO()."</td>"
-            ."<td>".$value->getplz()."</td>"
-            ."<td>".$value->gethausnummer()."</td>"
-            ."<td>".$value->getstreet()."</td>"
-            ."<td>".$value->getMail()."</td>"
-            ."<td>".$value->getGames()."</td>"
-            ."<td>".$value->getUsername()."</td>"
-            ."<td>".$value->getPassword()."</td>"
-            ."</tr>";
-    }
-
-echo "</table>";
+//echo "<table border=´1´>";
+//    echo "<tr><th>Nummer</th><th>Alter</th><th>Name</th><th>Vorname</th><th>ELO</th><th>PLZ</th><th>Hausnummer</th><th>Straße</th><th>E-Mail</th><th>Games</th><th>Username</th><th>Password</th></tr>";
+//
+//    foreach ($list as $key => $value) {
+//        echo "<tr>"
+//            ."<td>".$key.":"."</td>"
+//            ."<td>".$value->getAge(). "</td>"
+//            ."<td>".$value->getLName(). "</td>"
+//            ."<td>".$value->getFName()."</td>"
+//            ."<td>".$value->getELO()."</td>"
+//            ."<td>".$value->getplz()."</td>"
+//            ."<td>".$value->gethausnummer()."</td>"
+//            ."<td>".$value->getstreet()."</td>"
+//            ."<td>".$value->getMail()."</td>"
+//            ."<td>".$value->getGames()."</td>"
+//            ."<td>".$value->getUsername()."</td>"
+//            ."<td>".$value->getPassword()."</td>"
+//            ."</tr>";
+//    }
+//
+//echo "</table>";
 
 
 
@@ -90,6 +90,6 @@ echo "</table>";
 //echo "PLZ: " . $person->getplz() . $u;
 //echo "Hausnummer: " . $person->gethausnummer() . $u;
 //echo "Straße: " . $person->getstreet() . $u;
-//echo "Mail: " . $person->getMail() . $u; a
+//echo "Mail: " . $person->getMail() . $u;
 
 

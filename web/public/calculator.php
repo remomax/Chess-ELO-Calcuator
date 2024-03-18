@@ -138,6 +138,8 @@ echo "ELO B: ";
 echo $ELOB;
 
 
+
+
 ?>
 </body></html>
 

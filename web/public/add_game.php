@@ -9,7 +9,6 @@ $connection = $connection->getConnection();
 
 
 
-
 $statement = $connection->prepare('INSERT INTO games (id_white, id_black, gameoutcome, elo_white_before, elo_white_after, elo_black_before, elo_black_after, gametype)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 $statement->bind_param(

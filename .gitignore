@@ -1,4 +1,4 @@
-data/*
-.idea/*
-etc/*
+/data/*
+/.idea/*
+/etc/*
 /web/public/old/*

@@ -3,6 +3,7 @@ declare(strict_types=1);
  $u = "<br>";
 class Person {
 
+    private int $id;
     private int $age;
     private string $lname;
     private string $fname;
@@ -51,8 +52,6 @@ class Person {
         return $this->password;
     }
 
-
-
     public function setAge(int $age): void {
         if ($age <= 17) {
             echo " <br>Du musst mindestens 18 Jahre alt sein um dich zu Regestriren <br>";
@@ -95,4 +94,13 @@ class Person {
         $this->password = $password;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 }

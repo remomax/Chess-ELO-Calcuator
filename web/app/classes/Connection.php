@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 class Connection
 {
     public function getConnection(): mysqli

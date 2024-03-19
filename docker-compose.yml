@@ -29,7 +29,7 @@ services:
   composer:
     image: "composer"
     volumes:
-      - "./web/app:/app"
+      - "./web:/var/www/html"
     command: install
   myadmin:
     image: phpmyadmin/phpmyadmin

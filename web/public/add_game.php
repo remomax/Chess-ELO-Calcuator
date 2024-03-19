@@ -20,10 +20,12 @@ $redirect = function () {
 
 $gameRepository = new GameRepository();
 if ($gameRepository->storeGame($_POST)) {
-    $redirect();
+    echo "<h1>Spiel wurde eingetragen</h1>";
+
+    echo "<h1><a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a></h1>";
 }
 
-$redirect();
+
 
 //$connection = new Connection();
 //$id_white = $_POST["id_a"];

@@ -1,0 +1,21 @@
+{
+    "name": "praktikant/praktikum",
+    "type": "project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Praktikant\\Praktikum\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maximilian Schwarz",
+            "email": "maximilian.schwarz100@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "pecee/simple-router": "^5.4",
+        "psr/log": "^1.0"
+    }
+}

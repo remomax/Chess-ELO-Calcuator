@@ -10,6 +10,13 @@
     <option name="highlightLevel" value="WARNING" />
     <option name="transferred" value="true" />
   </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/web/vendor/pecee/simple-router" />
+      <path value="$PROJECT_DIR$/web/vendor/composer" />
+      <path value="$PROJECT_DIR$/web/vendor/psr/log" />
+    </include_path>
+  </component>
   <component name="PhpInterpreters">
     <interpreters>
       <interpreter id="2dd6bea9-eca1-4313-9cbe-e0c6cd72095b" name="docker-php-81" home="docker-compose://DATA" auto="false" debugger_id="php.debugger.XDebug">

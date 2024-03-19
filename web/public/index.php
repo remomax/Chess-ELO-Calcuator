@@ -4,6 +4,7 @@ $u = "<br>";
 global $u;
 require "../app/classes/Person.php";
 require '../app/classes/Connection.php';
+include "add_game.php";
 ?>
     <form method="post" action="add_person.php">
 

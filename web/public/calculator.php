@@ -3,17 +3,31 @@ declare(strict_types=1);
 $u = "<br>";
 require '../app/classes/Connection.php';
 require "../app/classes/game.php";
+
+
 $connection = new Connection();
+global $ELOB;
+global $ELOA;
 ?>
 
 <html><head></head><body>
 
-<h1>Einfaches Eingabeformular</h1>
+<h1>Calculator</h1>
 
 <form method="post">
-    <h1>1 Gewonnen, 0.5 Remis, 0 Lost</h1>
-    <p><input minlength="1" maxlength="4" name="ra" > Deine ELO:</p>
-    <p><input minlength="1" maxlength="4" name="rb"> ELO Schwarz</p>
+    <h6></h6>
+    <label for="id_b">Wähle dein Gegner</label>
+
+    <select name="id_b" id="pet-select">
+        <option value="">--Gegner--</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+        <option value="parrot">Parrot</option>
+        <option value="spider">Spider</option>
+        <option value="goldfish">Goldfish</option>
+    </select>
+
     <p><input minlength="2" maxlength="2" name="k"> K-Wert</p>
       <input type="radio" Id="w" name="winner" value="1">
       <label for="html">Weiß Gewonnen</label><br>
@@ -72,10 +86,15 @@ echo "sb: ";
 var_dump($SB);
 echo $u;
 
-$RA = $_POST["ra"];
-$RB = $_POST["rb"];
-$K  = $_POST["k"];
 
+
+//$RA = $_POST["ra"];
+//$RB = $_POST["rb"];
+//$K  = $_POST["k"];
+
+$RA = 603;
+$RB = 661;
+$K = 40;
 echo $u;
 echo "ra + rb " . $RA . " " . $RB;
 echo "<br>";

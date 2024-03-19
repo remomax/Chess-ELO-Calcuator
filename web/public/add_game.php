@@ -1,9 +1,15 @@
 <?php
 declare(strict_types=1);
+global $ELOB;
+global $ELOA;
 $u = "<br>";
-require '../app/classes/Connection.php';
-require "../app/classes/game.php";
+require "calculator.php";
+var_dump($ELOB);
+
+
 $connection = new Connection();
+
+
 
 $connection = $connection->getConnection();
 

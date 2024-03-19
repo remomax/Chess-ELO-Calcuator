@@ -4,7 +4,7 @@ class Connection
 {
     public function getConnection(): mysqli
     {
-        $servername = "172.21.0.4";
+        $servername = "mysql";
         $username = "root";
         $password = "root";
         $dbname = "praktikumdb";

@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
+global $ELOA, $ELOB;
+
 
 use Praktikant\Praktikum\Repository\GameRepository;
-
-global $ELOB;
-global $ELOA;
 $u = "<br>";
 require "../app/Repository/GameRepository.php";
 require "../app/Repository/PersonRepository.php";
@@ -18,15 +17,6 @@ $redirect = function () {
     exit();
 };
 
-$gameRepository = new GameRepository();
-if ($gameRepository->storeGame($_POST)) {
-    echo "<h1>"."Spiel wurde eingetragen"."</h1>";
-    echo "<h1>"."Neue ELO Weiß: " . $ELOA . "</h1>";
-    echo "<br>";
-    echo "<h1>"."Neue ELO Schwarz: ". $ELOB . "</h1>";
-    echo "<br>";
-    echo "<h1>"."<a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a>"."</h1>";
-}
 
 
 

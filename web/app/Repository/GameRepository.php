@@ -17,21 +17,9 @@ class GameRepository
         $RA = $whitePlayer->getELO(); //Old ELO of White Player
         $RB = $blackPlayer->getELO(); //Old ELO of Black Player
         $K = 40;
-        if ($post["winner"] == 'white') {
-            $SA = 1;
-            $SB = 0;
-            $gameoutcome = "White";
-        }
-        elseif ($post["winner"] == 'black') {
-            $SA = 0;
-            $SB = 1;
-            $gameoutcome = "Black";
-        }
-        elseif ($post["winner"] == 'remis') {
-            $SA = 0.5;
-            $SB = 0.5;
-            $gameoutcome = "Remie";
-        }
+
+        [$SA, $SB] = $this->getScore($post['winner']);
+        $gameoutcome = ucfirst($post['winner']);
 
             // PLayer White
         $connection = new Connection();
@@ -71,6 +59,12 @@ class GameRepository
         $id_white = $post["player_white"];
         $id_black = $post["player_black"];
 
+        echo "<h1>"."Spiel wurde eingetragen"."</h1>";
+        echo "<h1>"."Neue ELO Weiß: " . $ELOA . "</h1>";
+        echo "<br>";
+        echo "<h1>"."Neue ELO Schwarz: ". $ELOB . "</h1>";
+        echo "<br>";
+        echo "<h1>"."<a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a>"."</h1>";
 
         $connection = $connection->getConnection();
 
@@ -89,4 +83,16 @@ class GameRepository
         $statement->execute();
         return true;
     }
+
+    private function getScore(string $winner): array
+    {
+        return match ($winner) {
+            'white' => [1, 0],
+            'black' => [0, 1],
+            'remis' => [0.5, 0.5],
+        };
+    }
+
+
 }
+

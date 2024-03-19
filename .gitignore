@@ -1,6 +1,5 @@
-data/
-.idea/
-etc/
-web/public/old/
+data
+.idea
+etc
 web/vendor/
 

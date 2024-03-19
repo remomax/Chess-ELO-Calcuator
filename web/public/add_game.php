@@ -20,9 +20,12 @@ $redirect = function () {
 
 $gameRepository = new GameRepository();
 if ($gameRepository->storeGame($_POST)) {
-    echo "<h1>Spiel wurde eingetragen</h1>";
-
-    echo "<h1><a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a></h1>";
+    echo "<h1>"."Spiel wurde eingetragen"."</h1>";
+    echo "<h1>"."Neue ELO Weiß: " . $ELOA . "</h1>";
+    echo "<br>";
+    echo "<h1>"."Neue ELO Schwarz: ". $ELOB . "</h1>";
+    echo "<br>";
+    echo "<h1>"."<a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a>"."</h1>";
 }
 
 

@@ -23,7 +23,7 @@ if ($gameRepository->storeGame($_POST)) {
     $redirect();
 }
 
-die();
+$redirect();
 
 //$connection = new Connection();
 //$id_white = $_POST["id_a"];

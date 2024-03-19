@@ -8,6 +8,7 @@ class GameRepository
 {
     public function storeGame(array $post): bool
     {
+
         $personRepository = new PersonRepository();
 
         $whitePlayer = $personRepository->getOne($post['player_white']);
@@ -19,14 +20,17 @@ class GameRepository
         if ($post["winner"] == 'white') {
             $SA = 1;
             $SB = 0;
+            $gameoutcome = "White";
         }
         elseif ($post["winner"] == 'black') {
             $SA = 0;
             $SB = 1;
+            $gameoutcome = "Black";
         }
         elseif ($post["winner"] == 'remis') {
             $SA = 0.5;
             $SB = 0.5;
+            $gameoutcome = "Remie";
         }
 
             // PLayer White
@@ -49,6 +53,40 @@ class GameRepository
         $ELOB_round = $RB + $K * ($SB - $EB);
         $ELOB = floor($ELOB_round); // $ELOB = New ELO of Player Black
 
+
+        if ($ELOA < 0) {
+            $ELOA = 0;
+        }
+        if ($ELOB < 0) {
+            $ELOB = 0;
+        }
+
+
+        // Stroing Variable
+        $elo_white_before = $whitePlayer->getELO();
+        $elo_black_before = $blackPlayer->getELO();
+        $elo_white_after = $ELOA;
+        $elo_black_after = $ELOB;
+        //----------------------------------
+        $id_white = $post["player_white"];
+        $id_black = $post["player_black"];
+
+
+        $connection = $connection->getConnection();
+
+        $statement = $connection->prepare('INSERT INTO games (id_white, id_black, gameoutcome, elo_white_before, elo_white_after, elo_black_before, elo_black_after)
+    VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $statement->bind_param(
+            'ddsdddd',
+            $id_white,
+            $id_black,
+            $gameoutcome,
+            $elo_white_before,
+            $elo_white_after,
+            $elo_black_before,
+            $elo_black_after,
+        );
+        $statement->execute();
         return true;
     }
 }

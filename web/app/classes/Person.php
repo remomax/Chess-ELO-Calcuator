@@ -15,6 +15,7 @@ class Person {
     private int $games;
     private string $username;
     private string $password;
+    private string $identifier;
 
 
     public function getplz(): ?string {
@@ -31,6 +32,9 @@ class Person {
     }
     public function getELO(): int {
         return $this->elo;
+    }
+    public function getIdentifier(): string {
+        return $this->identifier;
     }
 
     public function gethausnummer(): ?string {
@@ -97,5 +101,9 @@ class Person {
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
     }
 }

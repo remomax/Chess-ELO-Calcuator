@@ -1,6 +1,5 @@
 <?php
 use Pecee\SimpleRouter\SimpleRouter;
-
 echo dirname(__FILE__);
 /* Load external routes file */
 require_once '../vendor/autoload.php';

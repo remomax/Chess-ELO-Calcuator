@@ -4,7 +4,7 @@
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "Praktikant\\Praktikum\\": "/app",
+            "Praktikant\\Praktikum\\": "/app"
         }
     },
     "authors": [
@@ -17,6 +17,7 @@
     "require": {
         "pecee/simple-router": "^5.4",
         "psr/log": "^1.0",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+        "phpmailer/phpmailer": "^6.9"
     }
 }

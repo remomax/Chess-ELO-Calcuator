@@ -14,26 +14,6 @@ $die = function () {
 };
 
 
-// Funktion, um einen zufälligen String zu generieren
-function generateRandomString($length = 10)
-{
-    // Zeichen, die im zufälligen String enthalten sein sollen
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_+=*';
-    $randomString = '';
-    // Generiere den zufälligen String
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, strlen($characters) - 1)];
-    }
-    return $randomString;
-}
-
-// Aufruf der Funktion, um den zufälligen String zu generieren
-$randomString = generateRandomString();
-$identifier = $randomString;
-echo $identifier;
-die();
-
-
 
 
 //Checken ob der Username schon Vergeben ist
@@ -155,11 +135,10 @@ $verify = password_verify($_password, $_hash);
 if ($verify = true) {
     // Benutzer Abspeichern
     $connection = $connection->getConnection();
-    $statement = $connection->prepare('INSERT INTO person (identifier, age, lastname, firstname, elo, plz, hausnummer, street, email, games, username, password)
+    $statement = $connection->prepare('INSERT INTO person (age, lastname, firstname, elo, plz, hausnummer, street, email, games, username, password)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $statement->bind_param(
-        'sdssdssssdss',
-        $identifier,
+        'dssdssssdss',
         $_POST["age"],
         $_POST["lname"],
         $_POST["fname"],

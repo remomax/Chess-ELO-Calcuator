@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-
+echo "<h1><a href='index.php'>Zurück</a></h1>";
 use Praktikant\Praktikum\Repository\PersonRepository;
 
 $u = "<br>";
@@ -32,14 +32,14 @@ $persons = $personRepo->getAll();
 
     <select name="player_white">
         <?php foreach ($persons as $person): ?>
-            <option value="<?= $person->getId() ?>">--<?= $person->getUsername() ?>--</option>
+            <option value="<?= $person->getId() ?>"><?= $person->getUsername() ?></option>
         <?php endforeach ?>
     </select>
     <br>
     <label for="id_b">Player Black</label>
     <select name="player_black">
         <?php foreach ($persons as $person): ?>
-            <option value="<?= $person->getId() ?>">--<?= $person->getUsername() ?>--</option>
+            <option value="<?= $person->getId() ?>"><?= $person->getUsername() ?></option>
         <?php endforeach ?>
     </select>
     <br>
@@ -156,6 +156,5 @@ $persons = $personRepo->getAll();
 
 
 ?>
-</body>
-</html>
+
 

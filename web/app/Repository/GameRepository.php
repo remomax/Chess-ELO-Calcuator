@@ -8,6 +8,13 @@ class GameRepository
 {
     public function storeGame(array $post): bool
     {
+        $redirect = function () {
+            header('Location: http://localhost:8000/calculator.php', true, 301);
+            exit();
+        };
+        if ($post["player_white"] == $post["player_black"]) {
+            $redirect;
+        }
 
         $personRepository = new PersonRepository();
 
@@ -58,7 +65,6 @@ class GameRepository
         //----------------------------------
         $id_white = $post["player_white"];
         $id_black = $post["player_black"];
-
         echo "<h1>"."Spiel wurde eingetragen"."</h1>";
         echo "<h1>"."Neue ELO Weiß: " . $ELOA . "</h1>";
         echo "<br>";
@@ -68,10 +74,10 @@ class GameRepository
 
         $connection = $connection->getConnection();
 
-        $statement = $connection->prepare('INSERT INTO games (id_white, id_black, gameoutcome, elo_white_before, elo_white_after, elo_black_before, elo_black_after)
-    VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $statement = $connection->prepare('INSERT INTO games (id_white, id_black, gameoutcome, elo_white_before, elo_white_after, elo_black_before, elo_black_after, K_Wert)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->bind_param(
-            'ddsdddd',
+            'ddsddddd',
             $id_white,
             $id_black,
             $gameoutcome,
@@ -79,6 +85,7 @@ class GameRepository
             $elo_white_after,
             $elo_black_before,
             $elo_black_after,
+            $K,
         );
         $statement->execute();
         return true;

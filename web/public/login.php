@@ -12,10 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
 
     // SQL-Abfrage, um Benutzerdaten abzurufen
-    $sql = "SELECT (password) FROM person WHERE username = ?";
+    $sql = "SELECT `password` FROM `person` WHERE `username` = ?";
 
     // SQL-Abfrage vorbereiten
-    $stmt = $connection->getConnection()->query($sql);
+    $stmt = $connection->getConnection()->prepare($sql);
 
     // Parameter binden
     $stmt->bind_param("s", $username);
@@ -31,10 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         $hashed_password = $user['password'];
 
-        // Passwort aus dem Formular lesen
+        // Passwort aus dem Formular lesen und verschlüsseln
         $password = $_POST['password'];
+        $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Überprüfe das eingegebene Passwort mit dem verschlüsselten Passwort
+        // Überprüfe das verschlüsselte eingegebene Passwort mit dem verschlüsselten Passwort aus der Datenbank
         if (password_verify($password, $hashed_password)) {
             // Anmeldung erfolgreich
             $_SESSION['loggedin'] = true;

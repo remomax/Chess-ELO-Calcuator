@@ -7,16 +7,16 @@ require '../app/classes/Connection.php';
 ?>
     <form method="post" action="add_person.php">
 
-        <p><input minlength="3" maxlength="20" name="username"> Username:</p>
-        <p><input type="password" id="password" minlength="8" maxlength="100" name="password"> Password (8 characters minimum):</p>
-        <p><input minlength="2" maxlength="2" name="age"> Alter:</p>
-        <p><input minlength="2" maxlength="20" name="lname"> Name:</p>
-        <p><input minlength="2" maxlength="20" name="fname"> Vorname:</p>
+        <p><input minlength="3" maxlength="20" name="username" required> Username:</p>
+        <p><input type="password" id="password" minlength="8" maxlength="100" name="password" required> Password (8 characters minimum):</p>
+        <p><input minlength="2" maxlength="2" name="age" required> Alter:</p>
+        <p><input minlength="2" maxlength="20" name="lname" required> Name:</p>
+        <p><input minlength="2" maxlength="20" name="fname" required> Vorname:</p>
 <!--        <p><input minlength="1" maxlength="4" name="elo"> ELO:</p>-->
-        <p><input minlength="5" maxlength="20" name="plz"> PLZ:</p>
-        <p><input minlength="1" maxlength="5" name="hausnummer"> Hausnummer:</p>
-        <p><input minlength="1" maxlength="25" name="street"> Straße:</p>
-        <p><input minlength="5" name="email"> E-Mail:</p>
+        <p><input minlength="5" maxlength="20" name="plz" required> PLZ:</p>
+        <p><input minlength="1" maxlength="5" name="hausnummer" required> Hausnummer:</p>
+        <p><input minlength="1" maxlength="25" name="street" required> Straße:</p>
+        <p><input minlength="5" name="email" required> E-Mail:</p>
 <!--        <p><input minlength="1" name="games"> Wie Viele Gewertete Schach Spiele:</p>-->
         <p><input type="submit"></p>
 

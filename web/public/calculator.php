@@ -11,8 +11,6 @@ require "../app/classes/Person.php";
 
 $connection = new Connection();
 $connection = $connection->getConnection();
-global $ELOB;
-global $ELOA;
 
 $personRepo = new PersonRepository();
 $persons = $personRepo->getAll();

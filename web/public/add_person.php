@@ -3,9 +3,10 @@ declare(strict_types=1);
 require '../app/classes/Connection.php';
 $_POST["elo"] = 0;
 $_POST["games"] = 0;
+$_mail = new Person();
 $connection = new Connection();
 $redirect = function () {
-    header('Location: http://localhost:8000/index.php', true, 301);
+    header('Location: http://localhost:8000/send_email.php', true, 301);
     exit();
 };
 $die = function () {
@@ -125,6 +126,10 @@ if (checkdnsrr($domain, "MX")) {
 }
 
 
+$_mail->setemail($_POST["email"]);
+$_mail->setlName($_POST["lname"]);
+$_mail->setFName($_POST["fname"]);
+$_mail->setUsername($_POST["username"]);
 
 // Password Verschlüsseln
 $_password = $_POST["password"];

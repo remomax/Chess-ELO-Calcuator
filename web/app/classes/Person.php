@@ -15,6 +15,7 @@ class Person {
     private int $games;
     private string $username;
     private string $password;
+    private string $verify_id;
 
 
 
@@ -33,8 +34,6 @@ class Person {
     public function getELO(): int {
         return $this->elo;
     }
-
-
     public function gethausnummer(): ?string {
         return $this->hausnummer;
     }
@@ -53,7 +52,17 @@ class Person {
     public function getPassword(): string {
         return $this->password;
     }
+    public function getVerifyID(): string {
+        return $this->verifyid;
+    }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+ 
     public function setAge(int $age): void {
             $this->age = $age;
     }
@@ -91,14 +100,13 @@ class Person {
         $this->password = $password;
     }
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
     public function setId(int $id): void
     {
         $this->id = $id;
     }
-
+public function setVerifyID(string $verify_id): void
+    {
+        $this->verify_id = $verify_id;
+    }
 }

@@ -173,8 +173,8 @@ if ($verify = true) {
         $_POST["email"],
         $_POST["games"],
         $_POST["username"],
+        $_hash,
         $verify_id_hash
-        $_hash
     );
     $statement->execute();
 }

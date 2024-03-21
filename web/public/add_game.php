@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
-global $ELOA, $ELOB;
 
+$redirect = function () {
+    header('Location: http://localhost:8000/calculator.php', true, 301);
+    exit();
+};
 
 use Praktikant\Praktikum\Repository\GameRepository;
 $u = "<br>";
@@ -10,12 +13,15 @@ require "../app/Repository/PersonRepository.php";
 require '../app/classes/Connection.php';
 require '../app/classes/Person.php';
 
+$gameRepository = new GameRepository();
+if ($gameRepository->storeGame($_POST)) {
+
+}
 
 
-$redirect = function () {
-    header('Location: http://localhost:8000/calculator.php', true, 301);
-    exit();
-};
+
+
+
 
 
 

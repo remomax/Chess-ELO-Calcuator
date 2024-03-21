@@ -17,6 +17,7 @@ class Person {
     private string $password;
 
 
+
     public function getplz(): ?string {
         return $this->plz;
     }
@@ -32,6 +33,7 @@ class Person {
     public function getELO(): int {
         return $this->elo;
     }
+
 
     public function gethausnummer(): ?string {
         return $this->hausnummer;
@@ -53,12 +55,7 @@ class Person {
     }
 
     public function setAge(int $age): void {
-        if ($age <= 17) {
-            echo " <br>Du musst mindestens 18 Jahre alt sein um dich zu Regestriren <br>";
-        }
-        elseif ($age >= 18) {
             $this->age = $age;
-        }
     }
     public function setlName(string $lname): void {
             $this->lname = $lname;
@@ -103,4 +100,5 @@ class Person {
     {
         $this->id = $id;
     }
+
 }

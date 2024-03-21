@@ -4,16 +4,21 @@ namespace Praktikant\Praktikum\Classes;
 
 class Game
 {
+    private int $game_id;
     private int $id_white;
     private int $id_black;
-    private int $gameoutcome;
-    private int $elo_white_before;
-    private int $elo_white_after;
-    private int $elo_black_before;
-    private int $elo_black_after;
-    private int $gametype;
+    protected string $gameoutcome;
+    private int $elo_white_before = 0;
+    private int $elo_white_after = 0;
+    private int $elo_black_before = 0;
+    private int $elo_black_after = 0;
+    private string $time;
+    private int $K = 40;
 
-
+    public  function getGameID(): int
+    {
+        return $this->game_id;
+    }
     public function getID_white(): int
     {
         return $this->id_white;
@@ -48,13 +53,22 @@ class Game
     {
         return $this->elo_black_after;
     }
-
-    public function getGameType(): string
+    public function getTime(): string
     {
-        return $this->gametype;
+        return $this->time;
+    }
+    public function getK(): int
+    {
+        return $this->k;
     }
 
 
+
+
+    public function setGameID(int $game_id): void
+    {
+        $this->game_id = $game_id;
+    }
     public function setID_white(int $id_white): void
     {
         $this->id_white = $id_white;
@@ -63,11 +77,6 @@ class Game
     public function setID_black(int $id_black): void
     {
         $this->id_black = $id_black;
-    }
-
-    public function setGameoutcome(string $gameoutcome): void
-    {
-        $this->gameoutcome = $gameoutcome;
     }
 
     public function setELO_White_Before(int $elo_white_before): void
@@ -82,16 +91,24 @@ class Game
 
     public function setELO_Black_Before(int $ELO_Black_Before): void
     {
-        $this->elo_white_before = $ELO_Black_Before;
+        $this->elo_black_before = $ELO_Black_Before;
     }
 
     public function setELO_Black_After(int $ELO_Black_After): void
     {
         $this->elo_black_after = $ELO_Black_After;
     }
-
-    public function setGametype(string $gametype): void
+    public function setGameoutcome(string $gameoutcome): void
     {
-        $this->gametype = $gametype;
+        $this->gameoutcome = $gameoutcome;
     }
+    public function setTime(string $time): void
+    {
+        $this->time = $time;
+    }
+    public function setK(int $k): void
+    {
+        $this->k = $k;
+    }
+
 }

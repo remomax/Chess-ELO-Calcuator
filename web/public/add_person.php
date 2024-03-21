@@ -125,7 +125,26 @@ if (checkdnsrr($domain, "MX")) {
     die();
 }
 
+// Funktion, um einen zufälligen String zu generieren
+function generateRandomString($length = 10)
+{
+    // Zeichen, die im zufälligen String enthalten sein sollen
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_+=';
+    $randomString = '';
+    // Generiere den zufälligen String
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
+}
 
+// Aufruf der Funktion, um den zufälligen String zu generieren
+$verify_id = generateRandomString();
+$verify_id_hash = password_hash(string $verify_id, PASSWORD_DEFAULT);
+
+
+
+$_mail->setVerifyID($verify_id)
 $_mail->setemail($_POST["email"]);
 $_mail->setlName($_POST["lname"]);
 $_mail->setFName($_POST["fname"]);
@@ -140,10 +159,10 @@ $verify = password_verify($_password, $_hash);
 if ($verify = true) {
     // Benutzer Abspeichern
     $connection = $connection->getConnection();
-    $statement = $connection->prepare('INSERT INTO person (age, lastname, firstname, elo, plz, hausnummer, street, email, games, username, password)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $statement = $connection->prepare('INSERT INTO person (age, lastname, firstname, elo, plz, hausnummer, street, email, games, username, password, verify_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $statement->bind_param(
-        'dssdssssdss',
+        'dssdssssdsss',
         $_POST["age"],
         $_POST["lname"],
         $_POST["fname"],
@@ -154,6 +173,7 @@ if ($verify = true) {
         $_POST["email"],
         $_POST["games"],
         $_POST["username"],
+        $verify_id_hash
         $_hash
     );
     $statement->execute();

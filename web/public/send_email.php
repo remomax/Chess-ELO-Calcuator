@@ -42,7 +42,7 @@ $mail->isSMTP(); // SMTP verwenden
 $mail->Host = 'smtp.office365.com'; // SMTP-Server für Microsoft 365
 $mail->SMTPAuth = true; // SMTP-Authentifizierung aktivieren
 $mail->Username = 'maximilian.schwarz@igs-edigheim.de'; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
-$mail->Password = 'Max2010!'; // SMTP-Passwort (dein Microsoft 365 Passwort)
+$mail->Password = ''; // SMTP-Passwort (dein Microsoft 365 Passwort)
 $mail->SMTPSecure = 'tls'; // TLS-Verschlüsselung verwenden
 $mail->Port = 587; // Port des SMTP-Servers für Microsoft 365
 

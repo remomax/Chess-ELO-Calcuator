@@ -3,7 +3,9 @@
 // Include PHPMailer
 require '../vendor/autoload.php'; // Pfad zur autoload.php entsprechend deiner Installation
 require '../app/classes/Person.php';
+require '../app/classes/Connection.php';
 $_mail = new Person;
+$connection = new Connection;
 $redirect = function () {
     header('Location: http://localhost:8000/index.php', true, 301);
     exit();
@@ -12,25 +14,8 @@ $lname = $_mail->getLName();
 $fname = $_mail->getFName();
 $email = $_mail->getMail();
 $username = $_mail->getUsername();
+$verify_id = $_mail->getVerifyID();
 
-
-
-
-// Funktion, um einen zufälligen String zu generieren
-function generateRandomString($length = 10)
-{
-    // Zeichen, die im zufälligen String enthalten sein sollen
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_+=';
-    $randomString = '';
-    // Generiere den zufälligen String
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, strlen($characters) - 1)];
-    }
-    return $randomString;
-}
-
-// Aufruf der Funktion, um den zufälligen String zu generieren
-$verify_id = generateRandomString();
 
 
 

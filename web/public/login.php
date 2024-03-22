@@ -5,7 +5,7 @@ require '../app/classes/Connection.php';
 require "../app/Repository/PersonRepository.php";
 require '../app/classes/Person.php';
 use Praktikant\Praktikum\Repository\PersonRepository;
-
+use Praktikant\Praktikum\classes\Connection;
 $personRepo = new PersonRepository();
 $persons = $personRepo->getAll();
 ?>

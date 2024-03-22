@@ -4,18 +4,27 @@
 require '../vendor/autoload.php'; // Pfad zur autoload.php entsprechend deiner Installation
 require '../app/classes/Person.php';
 require '../app/classes/Connection.php';
-$_mail = new Person;
+use Praktikant\Praktikum\classes\Connection;
+use Praktikant\Praktikum\classes\Person;
+//include 'add_person.php';
+$_mail = new Person();
 $connection = new Connection;
 $redirect = function () {
     header('Location: http://localhost:8000/index.php', true, 301);
     exit();
 };
-$lname = $_mail->getLName();
-$fname = $_mail->getFName();
-$email = $_mail->getMail();
-$username = $_mail->getUsername();
-$verify_id = $_mail->getVerifyID();
+//var_dump($_mail);
+//$lname = $_mail->getLName();
+//$fname = $_mail->getFName();
+//$email = $_mail->getMail();
+//$username = $_mail->getUsername();
+//$verify_id = $_mail->getVerifyID();
 
+$verify_id = $_POST["verify_id"];
+$email = $_POST["email"];
+$lname = $_POST["lname"];
+$fname = $_POST["fname"];
+//$username = $_POST["username"];
 
 
 
@@ -38,9 +47,9 @@ $mail->addAddress($email, $lname . ", " . $fname); // Empfänger
 // Inhalt
 $mail->isHTML(true); // E-Mail als HTML formatieren
 $mail->Subject = 'Chess Calculator Verification';
-$mail->Body = 'Gehen sie auf: <a href="verify.php">Hier</a> und verifiziren sie sich mit ihrem Verifikations Code: ' . $verify_id .
-                'Wenn sie sich nicht Regestirt haben wennen sie sich bitte an <a href=mailto:"chesscalculatorhelp@outlook.de"></a>' .
-                '(Link: http://localhost:8000/verify.php)';
+$mail->Body = 'Guten Tag' . $fname . ", "  . $username  . '<br>Gehen sie auf: <a href="verify.php">Hier</a> und verifiziren sie sich mit ihrem Verifikations Code: ' . $verify_id .
+                '<br>Wenn sie sich nicht Regestirt haben wennen sie sich bitte an <a href=mailto:"chesscalculatorhelp@outlook.de"></a>' .
+                '<br>(Link: http://localhost:8000/verify.php)';
 
 // E-Mail senden
 if (!$mail->send()) {

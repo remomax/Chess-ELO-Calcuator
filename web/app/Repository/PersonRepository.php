@@ -2,7 +2,7 @@
 
 namespace Praktikant\Praktikum\Repository;
 
-use Connection;
+use Praktikant\Praktikum\classes\Connection;
 use Person;
 
 class PersonRepository

@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 require '../app/classes/Connection.php';
+require '../app/classes/Person.php';
+use Praktikant\Praktikum\classes\Person;
+use Praktikant\Praktikum\classes\Connection;
+
 $_POST["elo"] = 0;
 $_POST["games"] = 0;
 $_mail = new Person();
@@ -18,6 +22,7 @@ $die = function () {
 
 
 //Checken ob der Username schon Vergeben ist
+var_dump($_POST);
 $username = $_POST["username"];
 $sql = "SELECT * FROM person WHERE username='$username'";
 $result = $connection->getConnection()->query($sql);
@@ -140,15 +145,32 @@ function generateRandomString($length = 10)
 
 // Aufruf der Funktion, um den zufälligen String zu generieren
 $verify_id = generateRandomString();
-$verify_id_hash = password_hash(string $verify_id, PASSWORD_DEFAULT);
+$verify_id_hash = password_hash($verify_id, PASSWORD_DEFAULT);
 
 
 
-$_mail->setVerifyID($verify_id)
-$_mail->setemail($_POST["email"]);
-$_mail->setlName($_POST["lname"]);
-$_mail->setFName($_POST["fname"]);
-$_mail->setUsername($_POST["username"]);
+//$_mail->setVerifyID($verify_id);
+//$_mail->setemail($_POST["email"]);
+//$_mail->setlName($_POST["lname"]);
+//$_mail->setFName($_POST["fname"]);
+//$_mail->setUsername($_POST["username"]);
+//var_dump($_mail);
+//echo "<br>";
+//echo $_mail->getVerifyID();
+//echo "<br>";
+//echo $_mail->getlName($_POST["lname"]);
+//echo "<br>";
+//echo "1";
+//echo "<br>";
+//echo $_mail->getMail($_POST["email"]);
+//echo "<br>";
+//echo $_mail->getFName($_POST["fname"]);
+//echo "<br>";
+//echo $_mail->getUsername($_POST["username"]);
+//echo "<br>";
+//echo "1";
+//die();
+
 
 // Password Verschlüsseln
 $_password = $_POST["password"];

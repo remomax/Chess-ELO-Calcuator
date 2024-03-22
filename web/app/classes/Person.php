@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
- $u = "<br>";
+namespace Praktikant\Praktikum\classes;
+
 class Person {
 
     private int $id;
@@ -53,7 +54,7 @@ class Person {
         return $this->password;
     }
     public function getVerifyID(): string {
-        return $this->verifyid;
+        return $this->verify_id;
     }
 
     public function getId(): int
@@ -72,10 +73,10 @@ class Person {
     public function setFName(string $fname): void {
             $this->fname = $fname;
     }
-    public function setELO(int $elo):void {
+    public function setELO(int $elo): void {
         $this->elo = $elo;
     }
-    public function setplz(string $plz):void {
+    public function setplz(string $plz): void {
         $this->plz = $plz;
 
     }
@@ -105,7 +106,7 @@ class Person {
     {
         $this->id = $id;
     }
-public function setVerifyID(string $verify_id): void
+    public function setVerifyID(?string $verify_id): void
     {
         $this->verify_id = $verify_id;
     }

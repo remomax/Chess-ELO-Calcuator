@@ -72,9 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Anmeldung erfolgreich
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
-            echo "<br>";
-            echo "SUCCSESFUL!";
-            echo "<br>";
+            header('Location: http://localhost:8000/', true, 301);
+            exit();
         } else {
             // Falsche Anmeldeinformationen
             $error = "Falsche Anmeldeinformationen";

@@ -36,12 +36,12 @@ class LoginController
 // Überprüfe, ob das Formular abgesendet wurde
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Benutzername aus dem Formular lesen
-            $user = $_POST['username'];
+            $username = $_POST['username'];
             $password = $_POST["password"];
 
 
             // SQL-Abfrage, um Benutzerdaten abzurufen
-            $sql = 'SELECT password FROM person WHERE username="'.$user.'" LIMIT 1';
+            $sql = 'SELECT password FROM person WHERE username="'.$username.'" LIMIT 1';
             $result = $connection->getConnection()->query($sql);
             if ($result->num_rows > 0) {
                 // output data of each row
@@ -54,7 +54,7 @@ class LoginController
             }
 
             // Ergebnis der Abfrage holen
-            $username = $result->fetch_assoc();
+            $user = $result->fetch_assoc();
 
             // Überprüfe das verschlüsselte eingegebene Passwort mit dem verschlüsselten Passwort aus der Datenbank
             if (password_verify($password, $hash)) {
@@ -62,7 +62,7 @@ class LoginController
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
 
-                redirect(url('main'));
+                redirect(url('/'));
             } else {
                 // Falsche Anmeldeinformationen
                 $error = "Falsche Anmeldeinformationen";

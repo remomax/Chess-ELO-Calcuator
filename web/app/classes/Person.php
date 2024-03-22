@@ -88,7 +88,7 @@ class Person {
             $this->street = $street;
 
     }
-    public function setemail(string $email): void {
+    public function setMail(string $email): void {
         $this->email = $email;
     }
     public function setGames(int $games): void {

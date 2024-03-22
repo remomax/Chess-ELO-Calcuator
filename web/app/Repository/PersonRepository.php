@@ -3,7 +3,7 @@
 namespace Praktikant\Praktikum\Repository;
 
 use Praktikant\Praktikum\classes\Connection;
-use Person;
+use Praktikant\Praktikum\classes\Person;
 
 class PersonRepository
 {
@@ -49,7 +49,7 @@ class PersonRepository
         $person->setplz((string)$data["plz"]);
         $person->sethausnummer((string)$data["hausnummer"]);
         $person->setstreet((string)$data["street"]);
-        $person->setemail((string)$data["email"]);
+        $person->setMail((string)$data["email"]);
         $person->setGames((int)$data["games"]);
         $person->setUsername((string)$data["username"]);
         $person->setPassword((string)$data["password"]);

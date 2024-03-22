@@ -1,5 +1,14 @@
 <?php
 declare(strict_types=1);
+if ($_SESSION = []) {
+    header('Location: http://localhost:8000/login', true, 301);
+    exit();
+} elseif ($_SESSION["loggedin"] = false) {
+    header('Location: http://localhost:8000/login', true, 301);
+    exit();
+}
+elseif ($_SESSION["username"] = 'NULL') {header('Location: http://localhost:8000/login', true, 301);
+    exit();}
 echo "<h1><a href='index.php'>Zurück</a></h1>";
 use Praktikant\Praktikum\Repository\PersonRepository;
 
@@ -9,13 +18,13 @@ require "../app/classes/Game.php";
 require "../app/Repository/PersonRepository.php";
 require "../app/classes/Person.php";
 
+
 $connection = new Connection();
 $connection = $connection->getConnection();
 
 $personRepo = new PersonRepository();
 $persons = $personRepo->getAll();
 ?>
-
 <html>
 <head></head>
 <body>
@@ -51,7 +60,6 @@ $persons = $personRepo->getAll();
 
     <p><input type="submit"></p>
 </form>
-
 <?php
 //
 //echo "Winner: ";
@@ -153,6 +161,6 @@ $persons = $personRepo->getAll();
 //echo $ELOB;
 
 
-?>
+
 
 

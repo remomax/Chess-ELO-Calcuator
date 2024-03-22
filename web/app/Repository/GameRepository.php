@@ -2,12 +2,21 @@
 
 namespace Praktikant\Praktikum\Repository;
 
-use Connection;
+use Praktikant\Praktikum\classes\Connection;
 
 class GameRepository
 {
     public function storeGame(array $post): bool
     {
+        if ($_SESSION = []) {
+            header('Location: http://localhost:8000/login', true, 301);
+            exit();
+        } elseif ($_SESSION["loggedin"] = false) {
+            header('Location: http://localhost:8000/login', true, 301);
+            exit();
+        }
+        elseif ($_SESSION["username"] = 'NULL') {header('Location: http://localhost:8000/login', true, 301);
+            exit();}
         $redirect = function () {
             header('Location: http://localhost:8000/calculator.php', true, 301);
             exit();

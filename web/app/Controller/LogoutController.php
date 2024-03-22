@@ -7,6 +7,6 @@ class LogoutController
     public function index(): void
     {
         session_destroy();
-        redirect(url('login.get'));
+        redirect(url('main'));
     }
 }

@@ -14,9 +14,10 @@ require '../app/classes/Connection.php';
 require '../app/classes/Person.php';
 
 $gameRepository = new GameRepository();
-if ($gameRepository->storeGame($_POST)) {
-
-}
+$gameRepository->storeGame($_POST);
+//if ()) {
+//
+//}
 
 
 

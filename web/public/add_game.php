@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-$redirect = function () {
-    header('Location: http://localhost:8000/calculator.php', true, 301);
-    exit();
-};
 
 use Praktikant\Praktikum\Repository\GameRepository;
 $u = "<br>";

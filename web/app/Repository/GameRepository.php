@@ -8,23 +8,6 @@ class GameRepository
 {
     public function storeGame(array $post): bool
     {
-        if ($_SESSION = []) {
-            header('Location: http://localhost:8000/login', true, 301);
-            exit();
-        } elseif ($_SESSION["loggedin"] = false) {
-            header('Location: http://localhost:8000/login', true, 301);
-            exit();
-        }
-        elseif ($_SESSION["username"] = 'NULL') {header('Location: http://localhost:8000/login', true, 301);
-            exit();}
-        $redirect = function () {
-            header('Location: http://localhost:8000/calculator.php', true, 301);
-            exit();
-        };
-        if ($post["player_white"] == $post["player_black"]) {
-            $redirect;
-        }
-
         $personRepository = new PersonRepository();
 
         $whitePlayer = $personRepository->getOne($post['player_white']);
@@ -79,7 +62,7 @@ class GameRepository
         echo "<br>";
         echo "<h1>"."Neue ELO Schwarz: ". $ELOB . "</h1>";
         echo "<br>";
-        echo "<h1>"."<a href='http://localhost:8000/calculator.php'>" . "Zurück" . "</a>"."</h1>";
+        echo "<h1>"."<a href='http://localhost:8000/calculator_old.php'>" . "Zurück" . "</a>"."</h1>";
 
         $connection = $connection->getConnection();
 

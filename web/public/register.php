@@ -24,7 +24,7 @@ require '../app/classes/Connection.php';
 
 
 <?php
-echo "<h1><a href='index.php'>Main Page</a></h1>";
+echo "<h1><a href='/'>Main Page</a></h1>";
 //$sql = "SELECT * FROM person";
 //
 //$connection = new Connection();

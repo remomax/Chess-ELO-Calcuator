@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-echo "<h1><a href='index.php'>Zurück</a></h1>";
+echo "<h1><a href='/'>Zurück</a></h1>";
 use Praktikant\Praktikum\Repository\PersonRepository;
 
 $u = "<br>";
@@ -8,7 +8,7 @@ require '../app/classes/Connection.php';
 require "../app/classes/Game.php";
 require "../app/Repository/PersonRepository.php";
 require "../app/classes/Person.php";
-$connection = new Connection();
+$connection = new \Praktikant\Praktikum\classes\Connection();
 $games = new \Praktikant\Praktikum\Classes\Game();
 $personRepo = new PersonRepository();
 $persons = $personRepo->getAll();
@@ -24,13 +24,12 @@ $sql = "SELECT * FROM person";
 
 
 $result = $connection->getConnection()->query($sql);
-/* @var Person[] $list */
-$list = [];
+
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $person = new Person();
+
         $person->setAge((int)$row["age"]);
         $person->setlName((string)$row["lastname"]);
         $person->setfName((string)$row["firstname"]);

@@ -3,14 +3,14 @@ declare(strict_types=1);
 start_session();
 require '../app/classes/Connection.php';
 $connection = new Connection;
-if ($_SESSION = []) {
+if ($_SESSION == []) {
     header('Location: http://localhost:8000/login', true, 301);
     exit();
-} elseif ($_SESSION["loggedin"] = false) {
+} elseif ($_SESSION['loggedin'] === false) {
     header('Location: http://localhost:8000/login', true, 301);
     exit();
 }
-elseif ($_SESSION["username"] = 'NULL') {header('Location: http://localhost:8000/login', true, 301);
+elseif ($_SESSION['username'] == 'NULL') {header('Location: http://localhost:8000/login', true, 301);
     exit();}
 ?>
     <form method="post">

@@ -11,7 +11,7 @@ $_POST["games"] = 0;
 $mail123 = new Person();
 $connection = new Connection();
 $die = function () {
-    echo "<h1><a href='register.php'>Zurück</a></h1>";
+    echo "<h1><a href='/'>Zurück</a></h1>";
     die();
 };
 
@@ -218,7 +218,7 @@ if (!$mail->send()) {
     echo 'E-Mail wurde gesendet.';
     echo '<br>';
     echo 'Du hast 1 Woche zeit deine Email zu verifiziren!';
-    echo "<h1><a href='index.php'>Homepage</a></h1>";
+    echo "<h1><a href='/'>Homepage</a></h1>";
 }
 
 

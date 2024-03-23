@@ -1,35 +1,33 @@
 <?php
+declare(strict_types=1);
 
 namespace Praktikant\Praktikum\Controller;
 
 use Praktikant\Praktikum\classes\Connection;
+use Praktikant\Praktikum\classes\Html;
 
 class LoginController
 {
     public function index(): void
     {
-        echo '<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-<h2>Login</h2>
-
-<form method="post">
+        $html = new Html();
+        $html->setTitle('Loggen Sie sich ein');
+        $content = '<h2>Login</h2>
+<main class="form-signin">
+<form class="form-signin" method="post">
     <label for="username">Username:</label>
-    <input name="username" required>
+    <input name="username" class="form-control" required>
     <br>
     <label for="password">Passwort:</label>
     <input type="password" name="password" id="password" required><br><br>
     <input type="submit" value="Anmelden">
 </form>
-</body>
-</html>';
+</main>';
+        $html->render(['content' => $content, 'body_class' => 'text-center']);
     }
 
-    public function login(): void {
+    public function login(): void
+    {
         // Datenbankverbindung herstellen
         $connection = new Connection();
 
@@ -41,15 +39,16 @@ class LoginController
 
 
             // SQL-Abfrage, um Benutzerdaten abzurufen
-            $sql = 'SELECT password FROM person WHERE username="'.$username.'" LIMIT 1';
+            $sql = 'SELECT password FROM person WHERE username="' . $username . '" LIMIT 1';
             $result = $connection->getConnection()->query($sql);
             if ($result->num_rows > 0) {
                 // output data of each row
-                while($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
                     $hash = $row["password"];
                 }
             } else {
-                echo "0 results";
+                $error = "Falsche Anmeldeinformationen";
+                echo $error;
                 exit;
             }
 
@@ -61,8 +60,8 @@ class LoginController
                 // Anmeldung erfolgreich
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
-
-                redirect(url('/'));
+                header('Location: http://localhost:8000/', true, 301);
+                exit();
             } else {
                 // Falsche Anmeldeinformationen
                 $error = "Falsche Anmeldeinformationen";

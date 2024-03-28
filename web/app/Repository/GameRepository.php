@@ -62,7 +62,7 @@ class GameRepository
         echo "<br>";
         echo "<h1>"."Neue ELO Schwarz: ". $ELOB . "</h1>";
         echo "<br>";
-        echo "<h1>"."<a href='http://localhost:8000/calculator_old.php'>" . "Zurück" . "</a>"."</h1>";
+        echo "<h1>"."<a href='http://localhost:8000/'>" . "Zurück" . "</a>"."</h1>";
 
         $connection = $connection->getConnection();
 
@@ -79,9 +79,28 @@ class GameRepository
             $elo_black_after,
             $K,
         );
+
         $statement->execute();
+        $statement = $connection->prepare('UPDATE person SET elo = ? WHERE id = ?');
+        $statement->bind_param(
+            'dd',
+            $elo_black_after,
+            $id_black,
+        );
+        $statement->execute();
+
+
+        $statement = $connection->prepare('UPDATE person SET elo = ? WHERE id = ?');
+        $statement->bind_param(
+            'dd',
+            $elo_white_after,
+            $id_white,
+        );
+        $statement->execute();
+
         return true;
     }
+
 
     private function getScore(string $winner): array
     {

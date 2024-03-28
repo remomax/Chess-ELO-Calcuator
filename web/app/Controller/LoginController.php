@@ -10,19 +10,27 @@ class LoginController
 {
     public function index(): void
     {
+        $Status = $_GET["Status"] ?? '';
+        if ($Status == 'BadLogin')
+        {
+            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Falsche Anmelde Informationen</h2>';
+        } else {
+            $error = '';
+        }
         $html = new Html();
         $html->setTitle('Loggen Sie sich ein');
-        $content = '<h2>Login</h2>
+        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Loggen Sie sich ein</h2>' . $error . '
+<body class="text-center"
 <main class="form-signin">
 <form class="form-signin" method="post">
-    <label for="username">Username:</label>
-    <input name="username" class="form-control" required>
+
+    <input minlength="3" maxlength="20" type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
     <br>
-    <label for="password">Passwort:</label>
-    <input type="password" name="password" id="password" required><br><br>
-    <input type="submit" value="Anmelden">
+    
+    <input minlength="8" maxlength="100" class="form-control" type="password" name="password" id="password" placeholder="Password" required><br><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Anmelden">Anmelden</button>
 </form>
-</main>';
+</main> </body>';
         $html->render(['content' => $content, 'body_class' => 'text-center']);
     }
 
@@ -48,7 +56,7 @@ class LoginController
                 }
             } else {
                 $error = "Falsche Anmeldeinformationen";
-                echo $error;
+                redirect(url('login', Null, ['Status'=>'BadLogin'])->getAbsoluteUrl());
                 exit;
             }
 
@@ -65,7 +73,8 @@ class LoginController
             } else {
                 // Falsche Anmeldeinformationen
                 $error = "Falsche Anmeldeinformationen";
-                echo $error;
+                redirect(url('login', Null, ['Status'=>'BadLogin'])->getAbsoluteUrl());
+                exit();
             }
 
         }

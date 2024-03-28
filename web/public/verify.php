@@ -1,17 +1,13 @@
 <?php
 declare(strict_types=1);
+
+use Praktikant\Praktikum\classes\Logedin;
+
 start_session();
 require '../app/classes/Connection.php';
 $connection = new Connection;
-if ($_SESSION == []) {
-    header('Location: http://localhost:8000/login', true, 301);
-    exit();
-} elseif ($_SESSION['loggedin'] === false) {
-    header('Location: http://localhost:8000/login', true, 301);
-    exit();
-}
-elseif ($_SESSION['username'] == 'NULL') {header('Location: http://localhost:8000/login', true, 301);
-    exit();}
+$logedin = new Logedin();
+$logedin->Logedin();
 ?>
     <form method="post">
 

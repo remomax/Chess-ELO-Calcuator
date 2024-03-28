@@ -6,5 +6,5 @@ SimpleRouter::get('/', [\Praktikant\Praktikum\Controller\IndexController::class,
 SimpleRouter::get('/login', [\Praktikant\Praktikum\Controller\LoginController::class, 'index'], ['as' => 'login.get']);
 SimpleRouter::post('/login', [\Praktikant\Praktikum\Controller\LoginController::class, 'login'], ['as' => 'login.post']);
 SimpleRouter::get('/logout', [\Praktikant\Praktikum\Controller\LogoutController::class, 'index'], ['as' => 'logout.get']);
-//SimpleRouter::get('/send_email', [\Praktikant\Praktikum\Controller\LoginController::class, 'index'], ['as' => 'send_mail.get']);
-//SimpleRouter::post('/send_email', [\Praktikant\Praktikum\Controller\LoginController::class, 'index'], ['as' => 'send_mail.post']);
+SimpleRouter::get('/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'index'], ['as' => 'calculator.get']);
+SimpleRouter::post('/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'calculator'], ['as' => 'calculator.post']);

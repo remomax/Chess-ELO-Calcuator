@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
-echo "<h1><a href='/'>Zurück</a></h1>";
+
+
+use Praktikant\Praktikum\classes\Logedin;
 use Praktikant\Praktikum\Repository\PersonRepository;
 
 $u = "<br>";
@@ -8,9 +10,12 @@ require '../app/classes/Connection.php';
 require "../app/classes/Game.php";
 require "../app/Repository/PersonRepository.php";
 require "../app/classes/Person.php";
+$logedin = new Logedin();
+$logedin->Logedin();
 $connection = new \Praktikant\Praktikum\classes\Connection();
 $games = new \Praktikant\Praktikum\Classes\Game();
 $personRepo = new PersonRepository();
+$person = new \Praktikant\Praktikum\classes\Person();
 $persons = $personRepo->getAll();
 ?>
 
@@ -31,16 +36,9 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
 
         $person->setAge((int)$row["age"]);
-        $person->setlName((string)$row["lastname"]);
-        $person->setfName((string)$row["firstname"]);
-        $person->setELO((int)$row["elo"]);
-        $person->setplz((string)$row["plz"]);
-        $person->sethausnummer((string)$row["hausnummer"]);
-        $person->setstreet((string)$row["street"]);
-        $person->setemail((string)$row["email"]);
         $person->setGames((int)$row["games"]);
         $person->setUsername((string)$row["username"]);
-        $person->setPassword((string)$row["password"]);
+
 
         $list[] = $person;
     }
@@ -77,7 +75,7 @@ if ($result->num_rows > 0) {
 foreach ($list as $key => $value) {
 // Select Username and top_elo White
     $ID_white = $value->getID_white();
-    $sql = "SELECT (username) FROM person WHERE id = $ID_white";
+    $sql = "SELECT username FROM person WHERE id = '$ID_white' LIMIT 1";
     $result = $connection->getConnection()->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -90,7 +88,7 @@ foreach ($list as $key => $value) {
 
 // Select Username and top_elo Black
     $ID_black = $value->getID_black();
-    $sql = "SELECT (username) FROM person WHERE id = $ID_black";
+    $sql = "SELECT username FROM person WHERE id = '$ID_black' LIMIT 1";
     $result = $connection->getConnection()->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -124,7 +122,7 @@ foreach ($list as $key => $value) {
             ."<td style='padding: 10px'>".$value->getEloBlackBefore()."</td>"
             ."<td style='padding: 10px'>".$value->getEloBlackAfter()."</td>"
             ."<td style='padding: 10px'>".$value->getK()."</td>"
-            ."<td style='padding: 10px'>".$value->getEloBlackAfter()."</td>"
+            ."<td style='padding: 10px'>".$value->getTime()."</td>"
             ."</tr>";
 
 

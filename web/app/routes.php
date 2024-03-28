@@ -8,3 +8,11 @@ SimpleRouter::post('/login', [\Praktikant\Praktikum\Controller\LoginController::
 SimpleRouter::get('/logout', [\Praktikant\Praktikum\Controller\LogoutController::class, 'index'], ['as' => 'logout.get']);
 SimpleRouter::get('/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'index'], ['as' => 'calculator.get']);
 SimpleRouter::post('/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'calculator'], ['as' => 'calculator.post']);
+SimpleRouter::get('/AddGameController', [\Praktikant\Praktikum\Controller\AddGameController::class, 'index'], ['as' => 'AddGameController.get']);
+SimpleRouter::post('/AddGameController', [\Praktikant\Praktikum\Controller\AddGameController::class, 'index'], ['as' => 'AddGameController.post']);
+SimpleRouter::get('/calculator/AddGameController', [\Praktikant\Praktikum\Controller\AddGameController::class, 'index'], ['as' => 'AddGameController.get']);
+SimpleRouter::post('/calculator/AddGameController', [\Praktikant\Praktikum\Controller\AddGameController::class, 'index'], ['as' => 'AddGameController.post']);
+SimpleRouter::get('/calculator/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'index'], ['as' => 'calculator.get']);
+SimpleRouter::get('/register', [\Praktikant\Praktikum\Controller\RegisterController::class, 'index'], ['as' => 'RegisterController.get']);
+SimpleRouter::get('/AddPersonController', [\Praktikant\Praktikum\Controller\AddPersonController::class, 'index'], ['as' => 'AddPersonController.get']);
+

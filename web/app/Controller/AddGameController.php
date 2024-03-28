@@ -1,28 +1,30 @@
 <?php
 
-namespace Praktikant\Praktikum\Repository;
+namespace Praktikant\Praktikum\Controller;
 
 use Praktikant\Praktikum\classes\Connection;
 use Praktikant\Praktikum\classes\Html;
-use Praktikant\Praktikum\Controller\AddGameController;
+use Praktikant\Praktikum\Repository\PersonRepository;
 
-class GameRepository
+
+class AddGameController
 {
-    public function storeGame(array $post): bool
+    public function index(): void
     {
+
         $personRepository = new PersonRepository();
 
-        $whitePlayer = $personRepository->getOne($post['player_white']);
-        $blackPlayer = $personRepository->getOne($post['player_black']);
+        $whitePlayer = $personRepository->getOne($_POST['player_white']);
+        $blackPlayer = $personRepository->getOne($_POST['player_black']);
         // Set Variables
         $RA = $whitePlayer->getELO(); //Old ELO of White Player
         $RB = $blackPlayer->getELO(); //Old ELO of Black Player
         $K = 40;
 
-        [$SA, $SB] = $this->getScore($post['winner']);
-        $gameoutcome = ucfirst($post['winner']);
+        [$SA, $SB] = $this->getScore($_POST['winner']);
+        $gameoutcome = ucfirst($_POST['winner']);
 
-            // PLayer White
+        // PLayer White
         $connection = new Connection();
         $differenzBA = $RB - $RA;
         $differenzBA400 = $differenzBA / 400;
@@ -51,23 +53,21 @@ class GameRepository
         }
 
 
+
         // Stroing Variable
         $elo_white_before = $whitePlayer->getELO();
         $elo_black_before = $blackPlayer->getELO();
         $elo_white_after = $ELOA;
         $elo_black_after = $ELOB;
         //----------------------------------
-        $id_white = $post["player_white"];
-        $id_black = $post["player_black"];
+        $id_white = $_POST["player_white"];
+        $id_black = $_POST["player_black"];
         if ($id_black == $id_white) {
-            die();
+            redirect(url('calculator', Null, ['Status'=>'GleicherSpieler'])->getAbsoluteUrl());
         }
-        if ($id_white == $_SESSION['username']) {
-            $_SESSION['Gegner'] = $id_black;
-        }
-        if ($id_black == $_SESSION['username']){
-            $_SESSION['Gegner'] = $id_white;
-        }
+
+
+
 
 
         $connection = $connection->getConnection();
@@ -105,21 +105,19 @@ class GameRepository
         $statement->execute();
 
         $html = new Html();
-        $html->setTitle('Loggen Sie sich ein');
-        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Loggen Sie sich ein</h2>
+        $html->setTitle('Results');
+        $content = '<br><h1 class="h3 mb-3 font-weight-normal">Ergebnisse:</h1>
 <body class="text-center"
 <main class="form-signin">
 <form class="form-signin" method="post">
 
-    <h1>Hallo</h1>
-    
-    <input minlength="8" maxlength="100" class="form-control" type="password" name="password" id="password" placeholder="Password" required><br><br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Anmelden">Anmelden</button>
+    <h1 class="form-control">Neue ELO Weiß: ' . $elo_white_after .'   </h1>
+    <h1 class="form-control">Neue ELO Schwarz: ' . $elo_black_after .' </h1>  
+    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="history.back();">Back</button>
 </form>
 </main> </body>';
         $html->render(['content' => $content, 'body_class' => 'text-center']);
 
-        return true;
     }
 
 

@@ -19,7 +19,7 @@ class LoginController
         }
         $html = new Html();
         $html->setTitle('Loggen Sie sich ein');
-        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Loggen Sie sich ein</h2>' . $error . '
+        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Login</h2>' . $error . '
 <body class="text-center"
 <main class="form-signin">
 <form class="form-signin" method="post">

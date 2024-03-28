@@ -13,7 +13,8 @@ class Logedin
          header('Location: http://localhost:8000/login', true, 301);
          exit();
      }
-     elseif ($_SESSION['username'] == 'NULL') {header('Location: http://localhost:8000/login', true, 301);
+     elseif ($_SESSION['username'] == '') {header('Location: http://localhost:8000/login', true, 301);
+         session_destroy();
          exit();}
  }
 }

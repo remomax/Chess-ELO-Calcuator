@@ -2,5 +2,4 @@
 /.idea/
 /etc/
 /web/vendor/
-/web/app/Controller/AddPersonController.php
-/web/app/Controller/PasswordChangeController.php
+/web/app/classes/mailpassword.php

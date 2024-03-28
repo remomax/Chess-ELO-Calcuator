@@ -68,7 +68,7 @@ class LoginController
                 // Anmeldung erfolgreich
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
-                header('Location: http://localhost:8000/', true, 301);
+                redirect(url('/')->getAbsoluteUrl());
                 exit();
             } else {
                 // Falsche Anmeldeinformationen

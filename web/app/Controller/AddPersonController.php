@@ -158,7 +158,7 @@ public function Index(): void
     if ($verify = true) {
         // Benutzer Abspeichern
         $connection = $connection->getConnection();
-        $statement = $connection->prepare('INSERT INTO person (age, lastname, firstname, elo, email, games, username, password, verify_id)
+        $statement = $connection->prepare('INSERT INTO `person` (age, lastname, firstname, elo, email, games, username, password, verify_id)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->bind_param(
             'dssdsdsss',
@@ -178,7 +178,7 @@ public function Index(): void
 
     $connection = new Connection;
     $redirect = function () {
-        header('Location: http://localhost:8000/', true, 301);
+        redirect(url('/')->getAbsoluteUrl());
         exit();
     };
 

@@ -15,4 +15,5 @@ SimpleRouter::post('/calculator/AddGameController', [\Praktikant\Praktikum\Contr
 SimpleRouter::get('/calculator/calculator', [\Praktikant\Praktikum\Controller\CalculatorController::class, 'index'], ['as' => 'calculator.get']);
 SimpleRouter::get('/register', [\Praktikant\Praktikum\Controller\RegisterController::class, 'index'], ['as' => 'RegisterController.get']);
 SimpleRouter::get('/AddPersonController', [\Praktikant\Praktikum\Controller\AddPersonController::class, 'index'], ['as' => 'AddPersonController.get']);
+SimpleRouter::get('/Scoreboard', [\Praktikant\Praktikum\Controller\ScoreboardController::class, 'index'], ['as' => 'Scoreboard.get']);
 

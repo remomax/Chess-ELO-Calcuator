@@ -14,8 +14,8 @@ class IndexController
         $logedin->Logedin();
 
         $html = new Html();
-        $html->setTitle('Loggen Sie sich ein');
-        $content = '<h2>Hallo, ' . $_SESSION["username"] . '</h2>
+        $html->setTitle('Home');
+        $content = '<br><h1>Hallo, ' . $_SESSION["username"] . '</h1>
 <main class="form-signin">
 </main>';
         $html->render(['content' => $content, 'body_class' => 'text-center']);

@@ -43,8 +43,8 @@
 <ul>
     <li><a class="active" href="/">Home</a></li>
     <li><a href="calculator">Calculator</a></li>
-    <li><a href="scoreboard.php">Scoreboard</a></li>
-    <li><a href="Help.php">Help</a></li>
+    <li><a href="Scoreboard">Scoreboard</a></li>
+    <li><a href="register">Register</a></li>
     <li><a href="logout">Logout</a></li>
 </ul>
 <body class="<?= $body_class ?>">

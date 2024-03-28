@@ -46,9 +46,6 @@ class PersonRepository
         $person->setlName((string)$data["lastname"]);
         $person->setfName((string)$data["firstname"]);
         $person->setELO((int)$data["elo"]);
-        $person->setplz((string)$data["plz"]);
-        $person->sethausnummer((string)$data["hausnummer"]);
-        $person->setstreet((string)$data["street"]);
         $person->setMail((string)$data["email"]);
         $person->setGames((int)$data["games"]);
         $person->setUsername((string)$data["username"]);

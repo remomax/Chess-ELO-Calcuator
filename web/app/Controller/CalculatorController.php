@@ -32,7 +32,7 @@ public function index():void
     $content = '<h1 class="h3 mb-3 font-weight-normal">Calculator</h1>' . $error . '
 <body class="text-center">
 
-<form class="form-signin" method="post" action="AddGameController">
+<form class="form-signin" method="post" action="/AddGameController">
 
     <h6></h6>
 

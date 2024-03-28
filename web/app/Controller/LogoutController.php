@@ -7,6 +7,6 @@ class LogoutController
     public function index(): void
     {
         session_destroy();
-        redirect(url('login'));
+        redirect(url('login', Null, ['Status'=>'Logout'])->getAbsoluteUrl());
     }
 }

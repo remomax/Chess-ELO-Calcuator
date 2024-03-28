@@ -2,6 +2,15 @@
 /** @var string $html_title */
 /** @var string $body_class */
 /** @var string $content */
+    if ($_SESSION == [])
+    {$a = '<li><a href="/register">Register</a></li> <li><a href="/login">Login</a></li>';}
+    elseif ($_SESSION['username'] !== ''){
+      $a = '  <li><a class="active" href="/">Home</a></li>
+    <li><a href="/calculator">Calculator</a></li>
+    <li><a href="/Scoreboard">Scoreboard</a></li>
+    <li><a href="/PasswordChange">Password Ändern</a></li>
+    <li><a href="/logout">Logout</a></li> ';
+    }
 ?><!DOCTYPE html>
 <html lang="de">
 <head>
@@ -20,7 +29,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #333;
+            background-color: #595959;
         }
 
         li {
@@ -36,16 +45,12 @@
         }
 
         li a:hover {
-            background-color: #111;
+            background-color: #6c6c6c;
         }
     </style>
 </head>
 <ul>
-    <li><a class="active" href="/">Home</a></li>
-    <li><a href="calculator">Calculator</a></li>
-    <li><a href="Scoreboard">Scoreboard</a></li>
-    <li><a href="register">Register</a></li>
-    <li><a href="logout">Logout</a></li>
+    <?php echo $a; ?>
 </ul>
 <body class="<?= $body_class ?>">
 <?= $content ?>

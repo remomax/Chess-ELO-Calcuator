@@ -14,7 +14,10 @@ class LoginController
         if ($Status == 'BadLogin')
         {
             $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Falsche Anmelde Informationen</h2>';
-        } else {
+        } elseif ($Status == 'Logout'){
+            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Erfolgreich Ausgeloggt</h2>';
+        }
+        else {
             $error = '';
         }
         $html = new Html();

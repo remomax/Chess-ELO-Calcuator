@@ -42,7 +42,6 @@ class PersonRepository
     {
         $person = new Person();
         $person->setId((int)$data["id"]);
-        $person->setAge((int)$data["age"]);
         $person->setlName((string)$data["lastname"]);
         $person->setfName((string)$data["firstname"]);
         $person->setELO((int)$data["elo"]);

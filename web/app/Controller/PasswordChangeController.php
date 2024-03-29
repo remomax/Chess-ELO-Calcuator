@@ -44,7 +44,7 @@ public function Index(): void
 // Inhalt
         $mail->isHTML(true); // E-Mail als HTML formatieren
         $mail->Subject = 'Chess Calculator Change Password';
-        $mail->Body = 'Guten Tag ' . $fname . ", "  . $lname  . '<br>Ihr Password Wurde Erfolgreich Geändert!';
+        $mail->Body = 'Guten Tag ' . $fname . ", "  . $lname  . '<br>Ihr Password Wurde Erfolgreich Geaendert!';
         if ($mail->send()) {
             redirect(url('PasswordChange', Null, ['Status' => 'Succses'])->getAbsoluteUrl());
 

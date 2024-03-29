@@ -18,7 +18,7 @@ class ChangePasswordController
         } elseif ($Status == 'ERROR'){
             $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Falsches Password!</h2>';
         } elseif ($Status == 'E_ERROR'){
-            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">E-Mail Konnte Nicht Gesendet Werden.</h2>';
+            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">ERROR</h2>';
         }
         else {
             $error = '';
@@ -30,7 +30,7 @@ class ChangePasswordController
         $content = '<br><h2 class="h3 mb-3 font-weight-normal">Password Ändern</h2> ' . $error .  '
 <body class="text-center"
 <main class="form-signin">
-<form class="form-signin" method="post" action="PasswordChangeController">
+<form class="form-signin" method="post" action="/PasswordChangeController">
 
     
     <input minlength="8" maxlength="100" class="form-control" type="password" name="password" id="password" placeholder="Altes Password" required><br>

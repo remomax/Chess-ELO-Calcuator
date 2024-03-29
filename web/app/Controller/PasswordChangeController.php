@@ -4,7 +4,6 @@ namespace Praktikant\Praktikum\Controller;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use Praktikant\Praktikum\classes\Connection;
-use Praktikant\Praktikum\classes\mailpassword;
 
 class PasswordChangeController
 {
@@ -34,11 +33,15 @@ public function Index(): void
         $sql = "UPDATE person SET password = '$password_new_hash' WHERE username = '$username'";
         $result = $connection->getConnection()->query($sql);
         // Konfiguration
-        $mail = new mailpassword();
-        $mail->GetEmail();
-
+        $mail = new PHPMailer();
+        $mail->isSMTP(); // SMTP verwenden
+        $mail->Host = 'smtp.office365.com'; // SMTP-Server für Microsoft 365
+        $mail->SMTPAuth = true; // SMTP-Authentifizierung aktivieren
+        $mail->Username = 'maximilian.schwarz@igs-edigheim.de'; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
+        $mail->SMTPSecure = 'tls'; // TLS-Verschlüsselung verwenden
+        $mail->Port = 587; // Port des SMTP-Servers für Microsoft 365
 // Empfänger
-        $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz'); // Sender
+        $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz');
         $mail->addAddress($email, $lname .  $fname); // Empfänger
 
 // Inhalt
@@ -53,5 +56,6 @@ public function Index(): void
     } else {
         redirect(url('PasswordChange', Null, ['Status'=>'ERROR'])->getAbsoluteUrl());
     }
+    redirect(url('PasswordChange', Null, ['Status'=>'E_ERROR'])->getAbsoluteUrl());
 }
 }

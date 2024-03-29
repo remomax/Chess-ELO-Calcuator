@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Praktikant\Praktikum\classes\Connection;
 use Praktikant\Praktikum\classes\Html;
 use Praktikant\Praktikum\classes\Person;
-use Praktikant\Praktikum\classes\mailpassword;
+
 class AddPersonController
 {
 public function Index(): void
@@ -31,18 +31,18 @@ public function Index(): void
 
     if ($result->num_rows > 0) {
         echo "<h1>Benutzername Schon vergeben</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
     if ($_POST["username"] == '') {
         echo "<h1>Du must ein Username haben</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
     if ($_POST["password"] == '') {
         echo "<h1>Du must ein Password haben</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
@@ -52,12 +52,12 @@ public function Index(): void
 
     if ($_POST["lname"] == '') {
         echo "Du must einen Nachnamen haben";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
     if ($_POST["fname"] == '') {
         echo "Du must einen Vornamen haben";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
@@ -73,7 +73,7 @@ public function Index(): void
 
     if ($result->num_rows > 0) {
         echo "<h1>Email Schon vergeben</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
@@ -82,7 +82,7 @@ public function Index(): void
 
     } else {
         echo "<h1>In einer Email muss ein @ Sein!</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
@@ -91,7 +91,7 @@ public function Index(): void
 
     } else {
         echo "<h1>Die Email muss exstiren</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 //Checken ob Domain Exestirt
@@ -99,7 +99,7 @@ public function Index(): void
 
     } else {
         echo "<h1>Die Email Domain muss exstiren</h1>";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 //Checken ob Domain Exestirt über DNS
@@ -108,7 +108,7 @@ public function Index(): void
 
     } else {
         echo "Die Domain existiert nicht.";
-        echo "<h1><a href='register.php'>Zurück</a></h1>";
+        echo "<h1><a href='/register'>Zurück</a></h1>";
         die();
     }
 
@@ -172,18 +172,23 @@ public function Index(): void
 
 
 // Konfiguration
-    $mail = new mailpassword();
-    $mail->GetEmail();
+    $mail = new PHPMailer();
+    $mail->isSMTP(); // SMTP verwenden
+    $mail->Host = 'smtp.office365.com'; // SMTP-Server für Microsoft 365
+    $mail->SMTPAuth = true; // SMTP-Authentifizierung aktivieren
+    $mail->Username = 'maximilian.schwarz@igs-edigheim.de'; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
+    $mail->SMTPSecure = 'tls'; // TLS-Verschlüsselung verwenden
+    $mail->Port = 587; // Port des SMTP-Servers für Microsoft 365
 // Empfänger
-    $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz'); // Sender
-    $mail->addAddress($email, $lname . ", " . $fname); // Empfänger
+    $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz');
+    $mail->addAddress($email, $lname . $fname); // Empfänger
 
 // Inhalt
     $mail->isHTML(true); // E-Mail als HTML formatieren
     $mail->Subject = 'Chess Calculator Verification';
-    $mail->Body = 'Guten Tag' . $fname . ", "  . $username  . '<br>Gehen sie auf: <a href="verify.php">Hier</a> und verifiziren sie sich mit ihrem Verifikations Code: ' . $verify_id .
+    $mail->Body = 'Guten Tag ' . $fname . ", "  . $lname  . '<br>Gehen sie auf: <a href="verify.php">Hier</a> und verifiziren sie sich mit ihrem Verifikations Code: ' . $verify_id .
         '<br>Wenn sie sich nicht Regestirt haben wennen sie sich bitte an <a href=mailto:"chesscalculatorhelp@outlook.de"></a>' .
-        '<br>(Link: http://localhost:8000/verify.php)';
+        '<br>(Link: http://localhost:8000/verify.php) Dies Ist nur Eine Test Mail und das verify Funkzionirt noch nicht';
 
     if ($mail->send()) {
         $html = new Html();

@@ -20,7 +20,9 @@ SimpleRouter::post('/verify', [\Praktikant\Praktikum\Controller\VerifyController
 SimpleRouter::get('/PasswordChange', [\Praktikant\Praktikum\Controller\ChangePasswordController::class, 'index'], ['as' => 'ChangePW.get']);
 SimpleRouter::get('/PasswordChangeController', [\Praktikant\Praktikum\Controller\PasswordChangeController::class, 'index'], ['as' => 'ChangePW2.get']);
 SimpleRouter::get('/PasswordChange/PasswordChangeController', [\Praktikant\Praktikum\Controller\PasswordChangeController::class, 'index'], ['as' => 'ChangePW2.get']);
+SimpleRouter::get('/RealVerifyController', [\Praktikant\Praktikum\Controller\RealVerifyController::class, 'index'], ['as' => 'RealVerifyController.get']);
 SimpleRouter::post('/PasswordChange', [\Praktikant\Praktikum\Controller\ChangePasswordController::class, 'index'], ['as' => 'ChangePW.post']);
 SimpleRouter::post('/PasswordChangeController', [\Praktikant\Praktikum\Controller\PasswordChangeController::class, 'index'], ['as' => 'ChangePW2.post']);
 SimpleRouter::post('/PasswordChange/PasswordChangeController', [\Praktikant\Praktikum\Controller\PasswordChangeController::class, 'index'], ['as' => 'ChangePW2.post']);
+SimpleRouter::post('/RealVerifyController', [\Praktikant\Praktikum\Controller\RealVerifyController::class, 'index'], ['as' => 'RealVerifyController.post']);
 

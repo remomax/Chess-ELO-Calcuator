@@ -10,7 +10,6 @@ class CalculatorController
 {
 public function index():void
 {
-
     $Status = $_GET["Status"] ?? '';
     if ($Status == 'GleicherSpieler')
     {

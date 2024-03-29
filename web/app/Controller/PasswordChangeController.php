@@ -9,6 +9,7 @@ class PasswordChangeController
 {
 public function Index(): void
 {
+
     $connection = new Connection();
     $username = $_SESSION['username'];
     $sql = "SELECT password, email, lastname, firstname FROM `person` WHERE username='$username'";
@@ -27,9 +28,21 @@ public function Index(): void
     }
     $password_old = $_POST['password'];
     $password_new = $_POST['password2'];
+    $password_new_2 = $_POST['password3'];
+    if ($password_new_2 !== $password_new) {
+        redirect(url('PasswordChange', Null, ['Status'=>'ERROR_E'])->getAbsoluteUrl());
+    }
+
 
     if (password_verify($password_old, $password_hash) == true) {
         $password_new_hash = password_hash($password_new, PASSWORD_DEFAULT);
+        if ($password_new == $password_old) {
+            redirect(url('PasswordChange', Null, ['Status'=>'ERROR_EE'])->getAbsoluteUrl());
+        }
+        if ($password_new_2 == $password_old) {
+            redirect(url('PasswordChange', Null, ['Status'=>'ERROR_EE'])->getAbsoluteUrl());
+        }
+
         $sql = "UPDATE person SET password = '$password_new_hash' WHERE username = '$username'";
         $result = $connection->getConnection()->query($sql);
         // Konfiguration

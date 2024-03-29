@@ -12,6 +12,7 @@ class AddGameController
     public function index(): void
     {
 
+
         $personRepository = new PersonRepository();
 
         $whitePlayer = $personRepository->getOne($_POST['player_white']);
@@ -94,7 +95,7 @@ class AddGameController
             }
         }
         elseif ($username !== $username_black) {
-            if ($username == $username_white) {
+            if ($username !== $username_white) {
                 redirect(url('calculator', Null, ['Status'=>'EigenerSpieler'])->getAbsoluteUrl());
             }
         }

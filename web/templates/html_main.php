@@ -3,7 +3,7 @@
 /** @var string $body_class */
 /** @var string $content */
     if ($_SESSION == [])
-    {$a = '<li><a href="/register">Register</a></li> <li><a href="/login">Login</a></li>';}
+    {$a = '<li><a href="/register">Registrieren</a></li> <li><a href="/login">Login</a></li>';}
     elseif ($_SESSION['username'] !== ''){
       $a = '  <li><a class="active" href="/">Home</a></li>
     <li><a href="/calculator">Calculator</a></li>

@@ -10,12 +10,13 @@ class CalculatorController
 {
 public function index():void
 {
-
     $Status = $_GET["Status"] ?? '';
     if ($Status == 'GleicherSpieler')
     {
         $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Der Gleiche Spieler kann nicht gegen sich selbst spielen</h2>';
-    } else {
+    } elseif ($Status == 'EigenerSpieler') {
+        $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Du kannst nur für dich Selbst Spiele Eintragen</h2>';
+} else {
         $error = '';
     }
     $logedin = new Logedin();

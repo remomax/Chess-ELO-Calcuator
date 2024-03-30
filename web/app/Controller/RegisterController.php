@@ -9,8 +9,8 @@ class RegisterController
     public function Index(): void
     {
         $html = new Html();
-        $html->setTitle('Register');
-        $content = '<br><h1 class="h3 mb-3 font-weight-normal">Regestrirung:</h1>
+        $html->setTitle('Registrierung');
+        $content = '<br><h1 class="h3 mb-3 font-weight-normal">Registrierung:</h1>
 <body class="text-center"
 <main class="form-signin">
 <form class="form-signin" method="post" action="AddPersonController">

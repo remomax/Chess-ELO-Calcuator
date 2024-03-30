@@ -12,6 +12,7 @@ class AddGameController
     public function index(): void
     {
 
+
         $personRepository = new PersonRepository();
 
         $whitePlayer = $personRepository->getOne($_POST['player_white']);
@@ -65,8 +66,39 @@ class AddGameController
         if ($id_black == $id_white) {
             redirect(url('calculator', Null, ['Status'=>'GleicherSpieler'])->getAbsoluteUrl());
         }
+        $sql = "SELECT username FROM person WHERE id = '$id_black' LIMIT 1";
+        $result = $connection->getConnection()->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
 
+                $username_black = $row["username"];
+            }
+        } else {
+            echo '0 results';
+        }
+        $sql = "SELECT username FROM person WHERE id = '$id_white' LIMIT 1";
+        $result = $connection->getConnection()->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
 
+                $username_white = $row["username"];
+            }
+        } else {
+            echo '0 results';
+        }
+        $username = $_SESSION['username'];
+        if ($username !== $username_white) {
+            if ($username !== $username_black) {
+                redirect(url('calculator', Null, ['Status'=>'EigenerSpieler'])->getAbsoluteUrl());
+            }
+        }
+        elseif ($username !== $username_black) {
+            if ($username !== $username_white) {
+                redirect(url('calculator', Null, ['Status'=>'EigenerSpieler'])->getAbsoluteUrl());
+            }
+        }
 
 
 

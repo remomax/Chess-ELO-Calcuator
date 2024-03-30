@@ -65,8 +65,6 @@ class ScoreboardController
 
                 $list[] = $games;
             }
-        } else {
-            echo '0 results';
         }
 
         foreach ($list as $key => $value) {
@@ -127,7 +125,7 @@ class ScoreboardController
         $content = '<br><h1 class="h3 mb-3 font-weight-normal">Ergebnisse:</h1><br>
 <main class="">
 <table border=´1´>
- <tr><th style="padding: 10px">Game-ID:</th><th style="Fpadding: 15px">Weiß:</th><th style="padding: 15px">Schwarz:</th><th style="padding: 10px">Winner:</th><th style="padding: 10px">ELO White before</th><th style="padding: 10px">ELO White after</th><th style="padding: 10px">ELO Black before</th><th style="padding: 10px">ELO Black after</th><th style="padding: 10px">K-Wert</th><th style="padding: 10px">Time</th></tr>
+ <tr><th style="padding: 10px">Game-ID</th><th style="padding: 15px">Weiß</th><th style="padding: 15px">Schwarz</th><th style="padding: 10px">Gewinner</th><th style="padding: 10px">ELO Weiß bevor</th><th style="padding: 10px">ELO Weiß dannach</th><th style="padding: 10px">ELO Schwarz bevor</th><th style="padding: 10px">ELO Schwarz dannach</th><th style="padding: 10px">K-Wert</th><th style="padding: 10px">Datum-Zeit</th></tr>
 '.implode('', $lines).'
 </table>
 </main>';

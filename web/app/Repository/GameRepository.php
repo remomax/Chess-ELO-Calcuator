@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Repository;
 
 use Praktikant\Praktikum\classes\Connection;

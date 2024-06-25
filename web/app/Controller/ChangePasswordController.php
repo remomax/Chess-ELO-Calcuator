@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Controller;
 
 use PHPMailer\PHPMailer\PHPMailer;

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Controller;
 
 use Praktikant\Praktikum\classes\Html;
@@ -54,6 +54,11 @@ public function index():void
         <option value="white">Weiß</option>
         <option value="black">Schwarz</option>
         <option value="remis">Unendschieden/Remis</option>
+    </select>
+    <label for="Gamemodie"><br>Welcher Gamemodie?</label>
+    <select class="form-control" name="Gamemodie">
+        <option value="RAPID">Schnell-Schach</option>
+        <option value="BLITZ">Blitz-Schach</option>
     </select>
 
     <br><button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Abschicken</button>

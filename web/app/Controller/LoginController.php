@@ -16,7 +16,11 @@ class LoginController
             $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Falsche Anmelde Informationen</h2>';
         } elseif ($Status == 'Logout'){
             $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Erfolgreich Ausgeloggt</h2>';
-        }
+        } elseif ($Status == 'Verify'){
+            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: red">Du bist noch nicht Verifizirt, Falls du keine Email bekommen hast wenne dich an <a href=mailto:"chesscalculatorhelp@outlook.de">chesscalculatorhelp@outlook.de</a> </h2>';
+            } elseif ($Status == 'VerifyDone'){
+            $error = '<h2 class="h3 mb-3 font-weight-normal" style="color: green">Du hasst dich Erforlgreich Verifizirt! Melde dich nun an!</h2>';
+            }
         else {
             $error = '';
         }
@@ -50,12 +54,15 @@ class LoginController
 
 
             // SQL-Abfrage, um Benutzerdaten abzurufen
-            $sql = 'SELECT password FROM person WHERE username="' . $username . '" LIMIT 1';
+            $sql = 'SELECT password, is_verifyed FROM person WHERE username="' . $username . '" LIMIT 1';
             $result = $connection->getConnection()->query($sql);
             if ($result->num_rows > 0) {
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
                     $hash = $row["password"];
+                    if ($row["is_verifyed"] === '') {$verify_id_login = 0;} else {
+                    $verify_id_login = $row["is_verifyed"];
+                }
                 }
             } else {
                 $error = "Falsche Anmeldeinformationen";
@@ -65,12 +72,16 @@ class LoginController
 
             // Ergebnis der Abfrage holen
             $user = $result->fetch_assoc();
-
+            
+            if  ($verify_id_login !== '') {
+                if ($verify_id_login !== 0) {
+                    if ($verify_id_login == 1) {
             // Überprüfe das verschlüsselte eingegebene Passwort mit dem verschlüsselten Passwort aus der Datenbank
             if (password_verify($password, $hash)) {
                 // Anmeldung erfolgreich
                 $_SESSION['loggedin'] = true;
                 $_SESSION['username'] = $username;
+                $_SESSION['verifyed'] = true;
                 redirect(url('/')->getAbsoluteUrl());
                 exit();
             } else {
@@ -79,7 +90,10 @@ class LoginController
                 redirect(url('login', Null, ['Status'=>'BadLogin'])->getAbsoluteUrl());
                 exit();
             }
-
+        } else {redirect(url('login', Null, ['Status'=>'Verify'])->getAbsoluteUrl()); exit();}
+        } else {redirect(url('login', Null, ['Status'=>'Verify'])->getAbsoluteUrl()); exit();}
+        } else {redirect(url('login', Null, ['Status'=>'Verify'])->getAbsoluteUrl()); exit();}
+            }
         }
     }
-}
+

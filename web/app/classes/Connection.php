@@ -10,8 +10,8 @@ class Connection
 {
     public function getConnection(): mysqli
     {
-        $servername = "mysql";
-        $username = "root";
+        $servername = "localhost";
+        $username = "remomax";
         $password = "root";
         $dbname = "praktikumdb";
 

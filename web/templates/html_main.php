@@ -7,7 +7,8 @@
     elseif ($_SESSION['username'] !== ''){
       $a = '  <li><a class="active" href="/">Home</a></li>
     <li><a href="/calculator">Calculator</a></li>
-    <li><a href="/Scoreboard">Scoreboard</a></li>
+    <li><a href="/Scoreboard">Games-Scoreboard</a></li>
+    <li><a href="/PlayerScoreboard">Player-Scoreboard</a></li>
     <li><a href="/PasswordChange">Password Ändern</a></li>
     <li><a href="/logout">Logout</a></li> ';
     }

@@ -1,9 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Controller;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use Praktikant\Praktikum\classes\Connection;
+use Praktikant\Praktikum\classes\Email;
 
 class PasswordChangeController
 {
@@ -24,7 +25,7 @@ public function Index(): void
             $lname = $row["lastname"];
         }
     } else {
-        echo '0 results';
+
     }
     $password_old = $_POST['password'];
     $password_new = $_POST['password2'];
@@ -45,16 +46,23 @@ public function Index(): void
 
         $sql = "UPDATE person SET password = '$password_new_hash' WHERE username = '$username'";
         $result = $connection->getConnection()->query($sql);
+
         // Konfiguration
+        $mail_class = new Email;
+        $mail_class->getEmail($mail_class);
+    // Konfiguration
         $mail = new PHPMailer();
-        $mail->isSMTP(); // SMTP verwenden
-        $mail->Host = 'smtp.office365.com'; // SMTP-Server für Microsoft 365
-        $mail->SMTPAuth = true; // SMTP-Authentifizierung aktivieren
-        $mail->Username = 'maximilian.schwarz@igs-edigheim.de'; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
-        $mail->SMTPSecure = 'tls'; // TLS-Verschlüsselung verwenden
-        $mail->Port = 587; // Port des SMTP-Servers für Microsoft 365
-// Empfänger
-        $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz');
+        $mail->Host  = $mail_class['Mail'];
+        $mail->Password = $mail_class['Password'];
+        $mail->isSMTP($mail_class['isSMTP']); // SMTP verwenden
+        $mail->Host = $mail_class['Host']; // SMTP-Server für Microsoft 365
+        $mail->SMTPAuth = $mail_class['SMTPAuth']; // SMTP-Authentifizierung aktivieren
+        $mail->Username = $mail_class['Username']; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
+        $mail->SMTPSecure = $mail_class['SMTPSecure']; // TLS-Verschlüsselung verwenden
+        $mail->Port = $mail_class['Port']; // Port des SMTP-Servers für Microsoft 365
+    // Empfänger
+        $mail->setFrom($mail_class['setFrom']);
+        $mail->addAddress($email, $lname . $fname); // Empfänger
         $mail->addAddress($email, $lname .  $fname); // Empfänger
 
 // Inhalt

@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Praktikant\Praktikum\classes\Connection;
 use Praktikant\Praktikum\classes\Html;
 use Praktikant\Praktikum\classes\Person;
+use Praktikant\Praktikum\classes\Email;
 
 class AddPersonController
 {
@@ -14,10 +15,8 @@ public function Index(): void
 
     $_POST["elo"] = 0;
     $_POST["games"] = 0;
-    $mail123 = new Person();
     $connection = new Connection();
     $die = function () {
-        echo "<h1><a href='/'>Zurück</a></h1>";
         die();
     };
 
@@ -30,36 +29,16 @@ public function Index(): void
     $result = $connection->getConnection()->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<h1>Benutzername Schon vergeben</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
-        die();
-    }
-    if ($_POST["username"] == '') {
-        echo "<h1>Du must ein Username haben</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'user'])->getAbsoluteUrl());
         die();
     }
 
-    if ($_POST["password"] == '') {
-        echo "<h1>Du must ein Password haben</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
-        die();
-    }
-
-//Checken ob Alt Genug
 
 
 
-    if ($_POST["lname"] == '') {
-        echo "Du must einen Nachnamen haben";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
-        die();
-    }
-    if ($_POST["fname"] == '') {
-        echo "Du must einen Vornamen haben";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
-        die();
-    }
+
+
+
 
 
 
@@ -72,8 +51,7 @@ public function Index(): void
     $result = $connection->getConnection()->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<h1>Email Schon vergeben</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'emailuse'])->getAbsoluteUrl());
         die();
     }
 
@@ -81,8 +59,7 @@ public function Index(): void
     if (strpos($email, "@") !== false) {
 
     } else {
-        echo "<h1>In einer Email muss ein @ Sein!</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'emailat'])->getAbsoluteUrl());
         die();
     }
 
@@ -90,16 +67,14 @@ public function Index(): void
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
     } else {
-        echo "<h1>Die Email muss exstiren</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'emaildomain'])->getAbsoluteUrl());
         die();
     }
 //Checken ob Domain Exestirt
     if (filter_var($email, FILTER_VALIDATE_DOMAIN)) {
 
     } else {
-        echo "<h1>Die Email Domain muss exstiren</h1>";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'emaildomain'])->getAbsoluteUrl());
         die();
     }
 //Checken ob Domain Exestirt über DNS
@@ -107,16 +82,20 @@ public function Index(): void
     if (checkdnsrr($domain, "MX")) {
 
     } else {
-        echo "Die Domain existiert nicht.";
-        echo "<h1><a href='/register'>Zurück</a></h1>";
+        redirect(url('/register', Null, ['Status'=>'emaildomain'])->getAbsoluteUrl());
         die();
     }
+    
+//Alter Prüfen
+    $age = $_POST["age"];
+    if ($age >= 13) {} else {redirect(url('/register', Null, ['Status'=>'alter'])->getAbsoluteUrl()); die;} 
+
 
 // Funktion, um einen zufälligen String zu generieren
     function generateRandomString($length = 10)
     {
         // Zeichen, die im zufälligen String enthalten sein sollen
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_+=';
+        $characters = '<>0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*()[]{}\/?-_+=';
         $randomString = '';
         // Generiere den zufälligen String
         for ($i = 0; $i < $length; $i++) {
@@ -134,14 +113,14 @@ public function Index(): void
     $_hash = password_hash($_password, PASSWORD_DEFAULT);
     $verify = password_verify($_password, $_hash);
 // Verifyen ob das Password richtig gespeichert wurde
-
+    
     if ($verify = true) {
         // Benutzer Abspeichern
         $connection = $connection->getConnection();
-        $statement = $connection->prepare('INSERT INTO `person` (lastname, firstname, elo, email, games, username, password, verify_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement = $connection->prepare('INSERT INTO `person` (lastname, firstname, elo, email, games, username, password, verify_id, age)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->bind_param(
-            'ssdsdsss',
+            'ssdsdsssd',
             $_POST["lname"],
             $_POST["fname"],
             $_POST["elo"],
@@ -149,7 +128,8 @@ public function Index(): void
             $_POST["games"],
             $_POST["username"],
             $_hash,
-            $verify_id_hash
+            $verify_id_hash,
+            $age,
         );
         $statement->execute();
     }
@@ -170,37 +150,40 @@ public function Index(): void
 
 
 
-
+    $mail_class = new Email;
+    $mail_class->getEmail($mail_class);
 // Konfiguration
     $mail = new PHPMailer();
-    $mail->isSMTP(); // SMTP verwenden
-    $mail->Host = 'smtp.office365.com'; // SMTP-Server für Microsoft 365
-    $mail->SMTPAuth = true; // SMTP-Authentifizierung aktivieren
-    $mail->Username = 'maximilian.schwarz@igs-edigheim.de'; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
-    $mail->SMTPSecure = 'tls'; // TLS-Verschlüsselung verwenden
-    $mail->Port = 587; // Port des SMTP-Servers für Microsoft 365
+    $mail->Host  = $mail_class['Mail'];
+    $mail->Password = $mail_class['Password'];
+    $mail->isSMTP($mail_class['isSMTP']); // SMTP verwenden
+    $mail->Host = $mail_class['Host']; // SMTP-Server für Microsoft 365
+    $mail->SMTPAuth = $mail_class['SMTPAuth']; // SMTP-Authentifizierung aktivieren
+    $mail->Username = $mail_class['Mail']; // SMTP-Benutzername (deine Microsoft 365 E-Mail-Adresse)
+    $mail->SMTPSecure = $mail_class['SMTPSecure']; // TLS-Verschlüsselung verwenden
+    $mail->Port = $mail_class['Port']; // Port des SMTP-Servers für Microsoft 365
 // Empfänger
-    $mail->setFrom('maximilian.schwarz@igs-edigheim.de', 'Maximilian Schwarz');
+    $mail->setFrom($mail_class['setFrom']);
     $mail->addAddress($email, $lname . $fname); // Empfänger
 
 // Inhalt
     $mail->isHTML(true); // E-Mail als HTML formatieren
     $mail->Subject = 'Chess Calculator Verification';
     $mail->Body = 'Guten Tag ' . $fname . ", "  . $lname  . '<br>Gehen sie auf: <a href="verify.php">Hier</a> und verifiziren sie sich mit ihrem Verifikations Code: ' . $verify_id .
-        '<br>Wenn sie sich nicht Regestirt haben wennen sie sich bitte an <a href=mailto:"chesscalculatorhelp@outlook.de"></a>' .
-        '<br>(Link: http://localhost:8000/verify.php) Dies Ist nur Eine Test Mail und das verify Funkzionirt noch nicht';
+        '<br>Wenn sie sich nicht Regestirt haben wennen sie sich bitte an <a href=mailto:"chesscalculatorhelp@outlook.de">chesscalculatorhelp@outlook.de</a>' .
+        '<br><br>(Link: chess24.de/verify)';
 
     if ($mail->send()) {
         $html = new Html();
-        $html->setTitle('Erfolgreich Regestirt');
-        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Erfolgreich Regestirt</h2>
+        $html->setTitle('Erfolgreich Registriert');
+        $content = '<br><h2 class="h3 mb-3 font-weight-normal">Erfolgreich Registriert</h2>
 <body class="text-center"
 <main class="form-signin">
 <form class="form-signin" method="post">
 
     <h1 class="form-control" >E-Mail wurde gesendet.</h1>
     <br>
-     <h1 class="form-control" >Du hast 1 Woche zeit deine Email zu verifiziren!</h1>
+     <h1 class="form-control" >Du hast 1 Woche zeit deine Email zu verifizieren!</h1>
 </form>
 </main> </body>';
         $html->render(['content' => $content, 'body_class' => 'text-center']);
@@ -211,11 +194,11 @@ public function Index(): void
         $content = '<br><h2 style="color: red;" class="h3 mb-3 font-weight-normal">Fehler bei Regestirung</h2>
 <body class="text-center"
 <main class="form-signin">
-<form class="form-signin" method="post">
+<form class="form-signin" >
 
-    <h1 class="form-control" >E-Mail wurde gesendet.</h1>
+    <h1 class="form-control" >Regestrirung Fehlgeschlagen, Bitte Nochmal Versuchen</h1>
     <br>
-     <h1 class="form-control" >Du hast 1 Woche zeit deine Email zu verifiziren!</h1>
+     <h1 class="form-control" >Falls Der Fehler Schon Vergeben auftritt hiernach eine email an: <a href=mailto:"chesscalculatorhelp@outlook.de">chesscalculatorhelp@outlook.de</a> senden!</h1>
 </form>
 </main> </body>';
     }

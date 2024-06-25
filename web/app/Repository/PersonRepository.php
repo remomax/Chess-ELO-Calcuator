@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Repository;
 
 use Praktikant\Praktikum\classes\Connection;
@@ -23,7 +23,7 @@ class PersonRepository
                 $list[] = $this->hydrate($row);
             }
         } else {
-            echo '0 results';
+
         }
 
         return $list;

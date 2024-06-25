@@ -9,6 +9,7 @@ class Person {
     private string $lname;
     private string $fname;
     private int $elo;
+    private int $eloTop;
     private string $plz;
     private string $hausnummer;
     private string $street;
@@ -17,7 +18,7 @@ class Person {
     private string $username;
     private string $password;
     private string $verify_id;
-
+    private string $time;
 
 
     public function getplz(): ?string {
@@ -34,6 +35,9 @@ class Person {
     }
     public function getELO(): int {
         return $this->elo;
+    }
+    public function getEloTop(): int {
+        return $this->eloTop;
     }
     public function gethausnummer(): ?string {
         return $this->hausnummer;
@@ -61,6 +65,12 @@ class Person {
     {
         return $this->id;
     }
+    
+
+    public function getTime(): string
+    {
+        return $this->time;
+    }
 
 
  
@@ -75,6 +85,10 @@ class Person {
     }
     public function setELO(int $elo): void {
         $this->elo = $elo;
+    }
+    public function setEloTop(int $eloTop): void
+    {
+        $this->eloTop = $eloTop;
     }
     public function setplz(string $plz): void {
         $this->plz = $plz;
@@ -109,5 +123,9 @@ class Person {
     public function setVerifyID(?string $verify_id): void
     {
         $this->verify_id = $verify_id;
+    }
+    public function setTime(string $time): void
+    {
+        $this->time = $time;
     }
 }

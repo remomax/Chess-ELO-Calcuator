@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Praktikant\Praktikum\Classes;
 
 class Game
@@ -13,7 +13,7 @@ class Game
     private int $elo_black_before = 0;
     private int $elo_black_after = 0;
     private string $time;
-    private int $K = 40;
+    private int $k = 40;
 
     public  function getGameID(): int
     {

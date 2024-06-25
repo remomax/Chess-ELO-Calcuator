@@ -1,0 +1,23 @@
+{
+    "name": "praktikant/praktikum",
+    "type": "project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Praktikant\\Praktikum\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maximilian Schwarz",
+            "email": "maximilian.schwarz@igs-edigheim.de"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "pecee/simple-router": "^5.4",
+        "psr/log": "^1.0",
+        "ext-mysqli": "*",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

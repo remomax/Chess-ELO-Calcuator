@@ -17,7 +17,7 @@ class Email
         $mail_class['isSMTP'] = ''; //Leer Lassen am besten
         $mail_class['Host'] = ''; //Hier denn Host angeben
         $mail_class['SMTPAuth'] = true; //Hier die SMTPAuth auf 'true' order 'false' setzen
-        //$mail_class['Username'] = 'maximilian.schwarz@igs-edigheim.de'; //Das gleiche wie oben
+        $email_class['Username'] = $mail_class['Mail'];
         $mail_class['SMTPSecure'] ''; //
         $mail_class['Port'] = ; //Port anbegen
         // Empfänger

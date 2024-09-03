@@ -1,7 +1,7 @@
 This Project is made Public under this License (CC BY 4.0)
 
-https://creativecommons.org/licenses/by-sa/4.0/[
-](https://creativecommons.org/licenses/by-sa/4.0/)
+https://creativecommons.org/licenses/by-sa/4.0/
+
 You are free to:
 Share — copy and redistribute the material in any medium or format for any purpose, even commercially.
 Adapt — remix, transform, and build upon the material for any purpose, even commercially.

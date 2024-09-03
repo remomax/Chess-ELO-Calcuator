@@ -13,7 +13,3 @@ Then it will work, Have Fun
 
 
 
-(This reales is under The License CC BY-NC-SA 4.0, Failure to follow it can result in Legal Action
-https://creativecommons.org/licenses/by-nc-sa/4.0/
-)
- 

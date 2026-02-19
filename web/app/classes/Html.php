@@ -19,7 +19,6 @@ class Html
         $variables['content'] = $variables['content'] ?? '';
         extract($variables);
         $html = require dirname(__FILE__, 3) . '/templates/html_main.php';
-        echo $html;
         exit;
     }
 }
